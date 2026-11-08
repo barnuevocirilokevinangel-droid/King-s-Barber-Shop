@@ -388,23 +388,24 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
 
       <main className="flex-1">
         {/* ====================================================================
-            1. NUEVO HERO SECTION (Fotográfico, Compacto e Inmersivo en Gris Carbón)
+            1. HERO CINEMATOGRÁFICO - PÓSTER PREMIUM KING'S BARBER SHOP
         ==================================================================== */}
-        <section className="relative bg-neutral-900 text-white w-full min-h-[85vh] flex flex-col justify-center items-center pt-24 pb-8 overflow-hidden">
-          {/* Luz suave de estudio fotográfico (Key Light & Rim Light) */}
+        <section className="relative min-h-screen w-full flex flex-col justify-start items-center pt-24 pb-8 overflow-hidden bg-neutral-900 text-white">
+          {/* Luz suave de estudio fotográfico */}
           <div
             className="pointer-events-none absolute inset-0"
             style={{
               background:
-                'radial-gradient(circle at 50% 42%, rgba(255, 255, 255, 0.09) 0%, rgba(251, 191, 36, 0.06) 28%, rgba(23, 23, 23, 0) 68%)'
+                'radial-gradient(circle at 50% 38%, rgba(255, 255, 255, 0.08) 0%, rgba(251, 191, 36, 0.05) 30%, rgba(23, 23, 23, 0) 70%)'
             }}
           />
 
           {/* Texto gigante de fondo ("KING'S STUDIO") */}
-          <div className="text-[5rem] md:text-[10rem] font-black tracking-tight whitespace-nowrap overflow-hidden absolute inset-0 flex items-center justify-center opacity-[0.03] pointer-events-none select-none">
+          <div className="absolute top-[20%] left-0 w-full text-center text-[5rem] md:text-[12rem] font-black text-white/5 opacity-30 select-none pointer-events-none -z-10 tracking-tighter whitespace-nowrap overflow-hidden">
             KING&apos;S STUDIO
           </div>
 
+          {/* Ribete vertical lateral para desktop */}
           <div className="hidden xl:flex pointer-events-none select-none absolute left-7 top-1/2 -translate-y-1/2 flex-col items-center gap-4 opacity-30">
             <div className="w-px h-16 bg-amber-400" />
             <span
@@ -416,124 +417,136 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
             <div className="w-px h-16 bg-amber-400" />
           </div>
 
-          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 flex flex-col items-center justify-center my-auto w-full">
-            {/* Etiqueta Superior de Estudio */}
+          {/* Etiqueta Superior de Estudio */}
+          <motion.div
+            initial={{ opacity: 0, y: -12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="z-20 inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md text-amber-400 text-[11px] sm:text-xs font-extrabold uppercase tracking-widest shadow-lg"
+          >
+            <Award className="w-3.5 h-3.5 text-amber-400" />
+            <span>KING&apos;S BARBER SHOP • NUEVO CHIMBOTE &amp; CENTRO</span>
+          </motion.div>
+
+          {/* 2. TÍTULO PRINCIPAL MODERNO Y AGRESIVO */}
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: 'easeOut' }}
+            className="text-5xl md:text-7xl lg:text-8xl font-black text-center leading-[0.9] z-20 mt-4 relative uppercase tracking-tighter"
+          >
+            <span className="text-white">EL ESTILO </span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-amber-500 to-yellow-600">
+              QUE MANDA
+            </span>
+          </motion.h1>
+
+          {/* 3 & 4. CONTENEDOR CENTRAL: BACKLIGHT GLOW + IMAGEN REY + ETIQUETAS HUD */}
+          <div className="relative isolate w-full max-w-6xl mx-auto flex-1 flex justify-center items-center mt-3 sm:mt-4">
+            {/* 1. ILUMINACIÓN TRASERA (BACKLIGHT GLOW AJUSTADO) */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-amber-500/10 blur-[100px] rounded-full pointer-events-none -z-10" />
+
+            {/* Sombra de piso de estudio */}
+            <div className="pointer-events-none absolute bottom-4 left-1/2 -translate-x-1/2 w-64 sm:w-96 md:w-[32rem] h-8 bg-black/90 rounded-full blur-xl z-0" />
+
+            {/* 4. LA IMAGEN CENTRAL REY */}
+            <motion.img
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
+              src="/silla.png"
+              alt="King's Barber Shop"
+              className="w-auto h-[50vh] md:h-[65vh] max-h-[700px] object-contain drop-shadow-[0_0_40px_rgba(0,0,0,0.8)] z-10 pointer-events-none"
+            />
+
+            {/* 3. ETIQUETAS PREMIUM CON ICONOS Y LÍNEAS (ESTILO HUD) */}
+            {/* Etiqueta Izquierda (Mascarilla) */}
             <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="z-20 inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/5 border border-white/15 backdrop-blur-md text-amber-400 text-[11px] sm:text-xs font-extrabold uppercase tracking-widest mb-1.5 sm:mb-2"
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0, y: [0, -5, 0] }}
+              transition={{
+                x: { duration: 0.8, delay: 0.2 },
+                y: { duration: 4, repeat: Infinity, ease: 'easeInOut' }
+              }}
+              className="absolute top-[20%] left-4 md:left-[5%] lg:left-[10%] flex items-start gap-3 z-20 pointer-events-none select-none max-w-[170px] sm:max-w-[220px]"
             >
-              <Award className="w-3.5 h-3.5 text-amber-400" />
-              <span>KING&apos;S BARBER SHOP • NUEVO CHIMBOTE &amp; CENTRO</span>
+              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-amber-400/10 border border-amber-400/30 flex items-center justify-center shrink-0 shadow-[0_0_15px_rgba(251,191,36,0.18)]">
+                <Sparkles className="w-4 h-4 text-amber-400" />
+              </div>
+              <div className="border-b border-amber-500/30 pb-2">
+                <p className="text-[10px] md:text-xs font-black uppercase tracking-widest text-amber-400 drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)] leading-tight">
+                  Mascarilla y masajes incluidos
+                </p>
+                <p className="text-[8px] md:text-[10px] text-white/80 uppercase font-semibold tracking-wider mt-0.5">
+                  Ventaja King&apos;s
+                </p>
+              </div>
             </motion.div>
 
-            {/* COMPOSICIÓN CON SUPERPOSICIÓN DE CAPAS (Z-INDEX):
-                Capa 1 (z-0): Título gigante "EL ESTILO QUE MANDA"
-                Capa 2 (z-10): Imagen Real Silla y Barbero (/silla.png) (Massive Container)
-                Capa 3 (z-20): 3 Textos flotantes orbitando hacia los costados */}
-            <div className="relative w-full flex flex-col items-center pt-0">
-              {/* CAPA 1: TÍTULO GIGANTE DETRÁS DE LA SILLA */}
-              <motion.h1
-                initial={{ opacity: 0, y: 20, scale: 0.96 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
-                className="relative z-0 text-center font-black tracking-tight uppercase text-5xl md:text-7xl lg:text-8xl leading-none md:leading-[0.85] text-white select-none max-w-4xl"
-              >
-                EL ESTILO{' '}
-                <span className="block text-amber-400 sm:inline">QUE MANDA</span>
-              </motion.h1>
-
-              {/* CONTENEDOR MASSIVE (SEPARADO DEL H1 Y EXPANDIDO HACIA LOS COSTADOS) */}
-              <div className="relative w-full max-w-[95%] md:max-w-3xl lg:max-w-5xl mx-auto mt-8 md:mt-16 flex justify-center">
-                {/* Sombra de piso de estudio y resplandor sutil */}
-                <div className="pointer-events-none absolute -bottom-6 left-1/2 -translate-x-1/2 w-64 sm:w-96 md:w-[32rem] lg:w-[38rem] h-8 sm:h-10 bg-black/85 rounded-full blur-2xl z-0" />
-                <div className="pointer-events-none absolute -bottom-3 left-1/2 -translate-x-1/2 w-56 sm:w-80 md:w-[26rem] lg:w-[32rem] h-6 sm:h-8 bg-amber-500/15 rounded-full blur-xl z-0" />
-
-                <img
-                  src="/silla.png"
-                  alt="King's Barber"
-                  className="w-full h-auto max-h-[55vh] md:max-h-[65vh] object-contain z-10 drop-shadow-[0_20px_50px_rgba(251,191,36,0.15)] pointer-events-none"
-                />
-
-                {/* Etiqueta 1: Mascarilla (Separada hacia la izquierda) */}
-                <motion.div
-                  animate={{ y: [0, -6, 0] }}
-                  transition={{ duration: 3.6, repeat: Infinity, ease: 'easeInOut' }}
-                  className="absolute top-[10%] left-0 md:top-[15%] md:-left-16 lg:-left-32 z-20 w-[130px] md:w-[200px] text-left pointer-events-none select-none"
-                >
-                  <div className="flex items-center gap-1 sm:gap-1.5">
-                    <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-amber-400 shrink-0 drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]" />
-                    <span className="text-[10px] md:text-xs font-black uppercase tracking-widest text-amber-400 drop-shadow-[0_3px_3px_rgba(0,0,0,0.9)] leading-tight">
-                      Mascarilla y masajes incluidos
-                    </span>
-                  </div>
-                  <p className="text-[8px] md:text-[10px] text-white/80 font-bold uppercase tracking-widest drop-shadow-[0_2px_2px_rgba(0,0,0,0.9)] mt-0.5 leading-tight">
-                    Ventaja Competitiva King’s
-                  </p>
-                </motion.div>
-
-                {/* Etiqueta 2: Precio (S/ 15) (Separada hacia la derecha) */}
-                <motion.div
-                  animate={{ y: [0, -6, 0] }}
-                  transition={{ duration: 4.1, repeat: Infinity, ease: 'easeInOut', delay: 0.7 }}
-                  className="absolute top-[45%] right-0 md:top-[40%] md:-right-16 lg:-right-32 -translate-y-1/2 z-20 w-[110px] md:w-[180px] text-right pointer-events-none select-none"
-                >
-                  <div className="flex items-center justify-end gap-1 sm:gap-1.5">
-                    <span className="text-[10px] md:text-xs font-black uppercase tracking-widest text-amber-400 drop-shadow-[0_3px_3px_rgba(0,0,0,0.9)] leading-tight">
-                      Desde S/ 15
-                    </span>
-                    <Star className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-amber-400 shrink-0 drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]" />
-                  </div>
-                  <p className="text-[8px] md:text-[10px] text-white/80 font-bold uppercase tracking-widest drop-shadow-[0_2px_2px_rgba(0,0,0,0.9)] mt-0.5 leading-tight">
-                    Rituales &amp; Cortes Premium
-                  </p>
-                </motion.div>
-
-                {/* Etiqueta 3: Bioseguridad (Base hacia la izquierda) */}
-                <motion.div
-                  animate={{ y: [0, -6, 0] }}
-                  transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut', delay: 1.3 }}
-                  className="absolute bottom-0 left-0 md:bottom-[5%] md:-left-16 lg:-left-32 z-20 w-[130px] md:w-[200px] text-left pointer-events-none select-none"
-                >
-                  <div className="flex items-center gap-1 sm:gap-1.5">
-                    <ShieldCheck className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-amber-400 shrink-0 drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]" />
-                    <span className="text-[10px] md:text-xs font-black uppercase tracking-widest text-amber-400 drop-shadow-[0_3px_3px_rgba(0,0,0,0.9)] leading-tight">
-                      Bioseguridad Garantizada
-                    </span>
-                  </div>
-                  <p className="text-[8px] md:text-[10px] text-white/80 font-bold uppercase tracking-widest drop-shadow-[0_2px_2px_rgba(0,0,0,0.9)] mt-0.5 leading-tight">
-                    Esterilización UV &amp; Navaja Nueva
-                  </p>
-                </motion.div>
+            {/* Etiqueta Derecha (Precio) */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0, y: [0, -5, 0] }}
+              transition={{
+                x: { duration: 0.8, delay: 0.3 },
+                y: { duration: 4.3, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }
+              }}
+              className="absolute top-[50%] right-4 md:right-[5%] lg:right-[10%] flex items-start gap-3 text-right flex-row-reverse z-20 pointer-events-none select-none max-w-[160px] sm:max-w-[210px]"
+            >
+              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-amber-400/10 border border-amber-400/30 flex items-center justify-center shrink-0 shadow-[0_0_15px_rgba(251,191,36,0.18)]">
+                <Clock className="w-4 h-4 text-amber-400" />
               </div>
+              <div className="border-b border-amber-500/30 pb-2">
+                <p className="text-[10px] md:text-xs font-black uppercase tracking-widest text-amber-400 drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)] leading-tight">
+                  Desde S/ 15
+                </p>
+                <p className="text-[8px] md:text-[10px] text-white/80 uppercase font-semibold tracking-wider mt-0.5">
+                  Rituales Premium
+                </p>
+              </div>
+            </motion.div>
 
-              {/* Subtítulo y CTA inmediatamente visibles debajo de la silla */}
-              <motion.p
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.3, ease: 'easeOut' }}
-                className="mt-2 sm:mt-3 text-xs sm:text-sm md:text-base text-neutral-300 max-w-lg text-center font-medium leading-relaxed px-4"
-              >
-                Elige tu sede en Nuevo Chimbote o Chimbote Centro y separa tu silla al instante sin hacer colas.
-              </motion.p>
+            {/* Etiqueta Abajo (Bioseguridad) */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0, y: [0, -5, 0] }}
+              transition={{
+                x: { duration: 0.8, delay: 0.4 },
+                y: { duration: 4.6, repeat: Infinity, ease: 'easeInOut', delay: 1 }
+              }}
+              className="absolute bottom-[15%] left-4 md:left-[5%] lg:left-[10%] flex items-start gap-3 z-20 pointer-events-none select-none max-w-[170px] sm:max-w-[220px]"
+            >
+              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-amber-400/10 border border-amber-400/30 flex items-center justify-center shrink-0 shadow-[0_0_15px_rgba(251,191,36,0.18)]">
+                <ShieldCheck className="w-4 h-4 text-amber-400" />
+              </div>
+              <div className="border-b border-amber-500/30 pb-2">
+                <p className="text-[10px] md:text-xs font-black uppercase tracking-widest text-amber-400 drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)] leading-tight">
+                  Bioseguridad Garantizada
+                </p>
+                <p className="text-[8px] md:text-[10px] text-white/80 uppercase font-semibold tracking-wider mt-0.5">
+                  Esterilización UV
+                </p>
+              </div>
+            </motion.div>
+          </div>
 
-              <motion.button
-                type="button"
-                onClick={scrollToFunnel}
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.4, ease: 'easeOut' }}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.97 }}
-                className="mt-3 sm:mt-4 cursor-pointer group px-8 sm:px-10 py-3 sm:py-3.5 rounded-2xl bg-amber-400 hover:bg-amber-300 text-neutral-900 font-black text-xs sm:text-sm md:text-base uppercase tracking-tight shadow-[0_15px_35px_rgba(251,191,36,0.28)] transition-all flex items-center gap-2.5"
-              >
-                <span>Separar Silla Ahora</span>
-                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-neutral-900 text-amber-400 flex items-center justify-center group-hover:translate-x-1 transition-transform">
-                  <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 stroke-[3]" />
-                </div>
-              </motion.button>
-            </div>
+          {/* 5. BOTÓN RADIANTE Y MICROCOPY */}
+          <div className="z-20 flex flex-col items-center mt-3 px-4">
+            <motion.button
+              type="button"
+              onClick={scrollToFunnel}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.97 }}
+              className="cursor-pointer group px-8 sm:px-10 py-3.5 sm:py-4 rounded-2xl bg-amber-400 hover:bg-amber-300 text-neutral-900 font-black text-xs sm:text-sm md:text-base uppercase tracking-tight shadow-[0_0_30px_rgba(251,191,36,0.3)] hover:shadow-[0_0_50px_rgba(251,191,36,0.5)] transition-all flex items-center gap-2.5"
+            >
+              <span>Separar Silla Ahora</span>
+              <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-neutral-900 text-amber-400 flex items-center justify-center group-hover:translate-x-1 transition-transform">
+                <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 stroke-[3]" />
+              </div>
+            </motion.button>
+            <p className="mt-2 text-[11px] sm:text-xs text-neutral-400 max-w-md text-center font-medium">
+              Elige tu sede en Nuevo Chimbote o Chimbote Centro y separa tu silla al instante.
+            </p>
           </div>
         </section>
 
