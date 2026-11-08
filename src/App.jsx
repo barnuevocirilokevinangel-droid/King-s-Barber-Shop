@@ -34,7 +34,8 @@ import {
   AlertCircle,
   CreditCard,
   Building2,
-  LogOut
+  LogOut,
+  Award
 } from 'lucide-react';
 
 // ============================================================================
@@ -285,7 +286,7 @@ const formatTimer = (totalSeconds) => {
 };
 
 // ============================================================================
-// VISTA 1: WEB PÚBLICA (REDISEÑO "PREMIUM STUDIO" - ULTRA DARK & FRAMER MOTION)
+// VISTA 1: WEB PÚBLICA (ESTUDIO FOTOGRÁFICO PREMIUM: CARBÓN -> BLANCO ROTO)
 // ============================================================================
 function PublicBookingView({ onNewBooking, onOpenAdmin }) {
   const [selectedLocation, setSelectedLocation] = useState(LOCATIONS[0].id);
@@ -294,6 +295,7 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
   const [selectedTime, setSelectedTime] = useState(TIME_SLOTS[2]);
   const [clientName, setClientName] = useState('');
   const [clientPhone, setClientPhone] = useState('');
+  const [chairImgError, setChairImgError] = useState(false);
 
   // Estados de disparo de Webhook a n8n y pantalla de éxito
   const [isSendingWebhook, setIsSendingWebhook] = useState(false);
@@ -349,63 +351,70 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
     setClientPhone('');
   };
 
-  // Configuración de las 3 Etiquetas Flotantes (Pills) alrededor de la Silla
+  // 3 Etiquetas Flotantes alrededor de la Silla Fotográfica
   const floatingPills = [
     {
-      id: 'pill-fade',
-      text: '🔥 Fade Perfecto',
-      sub: 'Precisión milimétrica',
-      positionClass: '-top-5 -left-4 sm:top-6 sm:-left-16',
-      duration: 3.4,
+      id: 'pill-mascarilla',
+      title: 'Mascarilla y masajes incluidos',
+      sub: 'Ventaja Competitiva King’s',
+      icon: Sparkles,
+      positionClass: 'top-4 -left-3 sm:top-10 sm:-left-28 md:-left-36',
+      duration: 3.6,
       delay: 0
     },
     {
-      id: 'pill-price',
-      text: '⚡ Desde S/ 5',
-      sub: 'Adicionales & Cejas',
-      positionClass: 'top-1/3 -right-4 sm:top-1/2 sm:-right-20',
-      duration: 3.9,
+      id: 'pill-desde',
+      title: 'Desde S/ 15',
+      sub: 'Rituales & Cortes Premium',
+      icon: Star,
+      positionClass: 'top-1/3 -right-3 sm:top-2/5 sm:-right-24 md:-right-32',
+      duration: 4.1,
       delay: 0.7
     },
     {
-      id: 'pill-bio',
-      text: '🔪 Bioseguridad',
-      sub: 'Navajas esterilizadas',
-      positionClass: '-bottom-5 -left-2 sm:bottom-6 sm:-left-14',
-      duration: 4.3,
+      id: 'pill-bioseguridad',
+      title: 'Bioseguridad Garantizada',
+      sub: 'Esterilización UV & Navaja Nueva',
+      icon: ShieldCheck,
+      positionClass: 'bottom-6 -left-2 sm:bottom-10 sm:-left-24 md:-left-28',
+      duration: 4.5,
       delay: 1.3
     }
   ];
 
+  const marqueeItems = Array.from({ length: 8 }, () =>
+    "KING'S BARBER SHOP • CORTES PREMIUM • FADE • BARBA • "
+  );
+
   return (
-    <div className="min-h-screen bg-neutral-950 text-white flex flex-col justify-between selection:bg-amber-400 selection:text-neutral-950 overflow-x-hidden">
+    <div className="min-h-screen bg-neutral-50 text-neutral-800 flex flex-col justify-between selection:bg-amber-400 selection:text-neutral-900 overflow-x-hidden">
       {/* ====================================================================
-          BARRA DE NAVEGACIÓN SUPERIOR (Premium Studio Ultra Dark)
+          BARRA DE NAVEGACIÓN SUPERIOR (Gris Carbón Fotográfico)
       ==================================================================== */}
-      <header className="sticky top-0 z-30 bg-neutral-950/85 backdrop-blur-xl border-b border-white/10">
+      <header className="sticky top-0 z-40 bg-neutral-900/90 backdrop-blur-xl border-b border-white/10">
         <div className="max-w-6xl mx-auto px-5 sm:px-8 h-20 flex items-center justify-between">
           <div className="flex items-center gap-3.5">
-            <div className="w-11 h-11 rounded-2xl bg-neutral-900 flex items-center justify-center border border-amber-400/60 shadow-[0_0_25px_rgba(251,191,36,0.2)]">
-              <Crown className="w-6 h-6 text-amber-400" />
+            <div className="w-11 h-11 rounded-2xl bg-zinc-800 flex items-center justify-center border border-amber-400/60 shadow-md">
+              <Crown className="w-5 h-5 text-amber-400" />
             </div>
             <div>
-              <span className="font-black text-lg tracking-tighter text-white block leading-none">
+              <span className="font-black text-lg tracking-tight text-white block leading-none">
                 KING&apos;S BARBER SHOP
               </span>
-              <span className="text-[11px] font-extrabold text-amber-400 tracking-widest uppercase mt-1 block">
-                Chimbote &amp; Nuevo Chimbote
+              <span className="text-[11px] font-bold text-amber-400 tracking-widest uppercase mt-1 block">
+                Estudio de Barbería • Est. 2018
               </span>
             </div>
           </div>
 
           <motion.button
             type="button"
-            whileHover={{ scale: 1.05 }}
+            whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.96 }}
             onClick={scrollToFunnel}
-            className="cursor-pointer px-5 py-2.5 rounded-2xl bg-amber-400 text-neutral-950 text-xs sm:text-sm font-black uppercase tracking-tight hover:bg-amber-300 transition-colors flex items-center gap-2 shadow-[0_0_30px_rgba(251,191,36,0.3)]"
+            className="cursor-pointer px-5 py-2.5 rounded-2xl bg-amber-400 text-neutral-900 text-xs sm:text-sm font-black uppercase tracking-tight hover:bg-amber-300 transition-colors flex items-center gap-2 shadow-lg"
           >
-            <Scissors className="w-4 h-4 text-neutral-950 stroke-[2.5]" />
+            <Scissors className="w-4 h-4 text-neutral-900 stroke-[2.5]" />
             <span>Separar Silla</span>
           </motion.button>
         </div>
@@ -413,227 +422,333 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
 
       <main className="flex-1">
         {/* ====================================================================
-            1. NUEVO HERO SECTION (Visual Centralizado "Premium Studio")
+            1. NUEVO HERO SECTION (Fotográfico e Inmersivo en Gris Carbón)
         ==================================================================== */}
-        <section className="relative overflow-hidden pt-12 pb-20 sm:py-24 border-b border-white/10">
-          {/* Iluminación ambiental dorada y retícula sutil de estudio */}
+        <section className="relative bg-neutral-900 text-white pt-10 pb-20 sm:pt-16 sm:pb-28 overflow-hidden">
+          {/* Luz suave de estudio fotográfico (Key Light & Rim Light) */}
           <div
-            className="pointer-events-none absolute inset-0 opacity-[0.03]"
+            className="pointer-events-none absolute inset-0"
             style={{
-              backgroundImage:
-                'linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)',
-              backgroundSize: '64px 64px'
+              background:
+                'radial-gradient(circle at 50% 42%, rgba(255, 255, 255, 0.09) 0%, rgba(251, 191, 36, 0.06) 28%, rgba(23, 23, 23, 0) 68%)'
             }}
           />
-          <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[38rem] h-[38rem] bg-amber-400/10 rounded-full blur-[130px]" />
 
-          <div className="relative z-10 max-w-5xl mx-auto px-5 sm:px-8 text-center flex flex-col items-center">
-            {/* Badge Superior */}
+          {/* Marca de agua gigante en el fondo y texto vertical editorial */}
+          <div className="pointer-events-none select-none absolute inset-x-0 top-6 flex justify-center overflow-hidden opacity-[0.03]">
+            <span className="font-black text-[9rem] sm:text-[14rem] tracking-tight whitespace-nowrap leading-none">
+              KING&apos;S STUDIO
+            </span>
+          </div>
+
+          <div className="hidden xl:flex pointer-events-none select-none absolute left-7 top-1/2 -translate-y-1/2 flex-col items-center gap-4 opacity-30">
+            <div className="w-px h-16 bg-amber-400" />
+            <span
+              className="text-[11px] font-black tracking-[0.35em] uppercase text-neutral-300"
+              style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
+            >
+              KING&apos;S BARBER SHOP • EST. 2018
+            </span>
+            <div className="w-px h-16 bg-amber-400" />
+          </div>
+
+          <div className="relative max-w-6xl mx-auto px-5 sm:px-8 flex flex-col items-center">
+            {/* Etiqueta Superior de Estudio */}
             <motion.div
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-neutral-900 border border-amber-400/40 text-amber-400 text-xs font-black uppercase tracking-widest mb-6 shadow-lg"
+              className="z-20 inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/15 backdrop-blur-md text-amber-400 text-xs font-extrabold uppercase tracking-widest mb-4"
             >
-              <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-              <span>PREMIUM STUDIO • EXPERIENCIA VIP CERO COLAS</span>
+              <Award className="w-3.5 h-3.5 text-amber-400" />
+              <span>KING&apos;S BARBER SHOP • NUEVO CHIMBOTE &amp; CENTRO</span>
             </motion.div>
 
-            {/* TÍTULO GIGANTE CENTRADO EN LA PARTE SUPERIOR */}
-            <motion.h1
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-5xl sm:text-7xl md:text-8xl lg:text-[6.2rem] font-black tracking-tighter uppercase text-white leading-[0.92] max-w-4xl"
-            >
-              EL ESTILO <span className="text-amber-400">QUE MANDA</span>
-            </motion.h1>
-
-            <motion.p
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="mt-5 text-base sm:text-xl text-neutral-300 max-w-xl font-semibold"
-            >
-              Maestría en degradados, ritual de barba y atención cronometrada. Separa tu silla en segundos sin esperar.
-            </motion.p>
-
-            {/* CENTRO VISUAL: SILLA DE BARBERÍA PREMIUM ILUMINADA + 3 PILLS EN MOVIMIENTO */}
-            <div className="relative my-14 sm:my-16 flex items-center justify-center">
-              {/* Halo dorado pulsante exterior */}
-              <motion.div
-                animate={{ scale: [1, 1.05, 1], opacity: [0.35, 0.6, 0.35] }}
-                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-                className="pointer-events-none absolute w-72 h-72 sm:w-96 sm:h-96 rounded-full bg-amber-400/15 blur-2xl"
-              />
-
-              {/* Contenedor Circular Central con Gradiente Radial Oscuro y Borde Dorado */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.88 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.7, delay: 0.25 }}
-                style={{
-                  background:
-                    'radial-gradient(circle at 50% 35%, rgba(251, 191, 36, 0.22) 0%, rgba(23, 23, 23, 0.96) 62%, rgba(10, 10, 10, 1) 100%)'
-                }}
-                className="relative w-72 h-72 sm:w-88 sm:h-88 md:w-96 md:h-96 rounded-full border-2 border-amber-400 shadow-[0_0_70px_rgba(251,191,36,0.22)] flex flex-col items-center justify-center p-8"
+            {/* COMPOSICIÓN CON SUPERPOSICIÓN DE CAPAS (Z-INDEX):
+                Capa 1 (z-10): Título gigante "EL ESTILO QUE MANDA"
+                Capa 2 (z-20): Imagen Central Fotográfica de Silla de Barbería superpuesta parcialmente delante del titular
+                Capa 3 (z-30): 3 Etiquetas flotantes asíncronas */}
+            <div className="relative w-full flex flex-col items-center pt-2 sm:pt-4">
+              {/* CAPA 1 (z-10): TÍTULO GIGANTE DETRÁS DE LA SILLA */}
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.65 }}
+                className="relative z-10 text-center font-black tracking-tight uppercase text-5xl sm:text-7xl md:text-8xl lg:text-[6.8rem] leading-[0.88] text-white select-none max-w-5xl"
               >
-                {/* Anillo interno decorativo */}
-                <div className="pointer-events-none absolute inset-3 rounded-full border border-amber-400/25 border-dashed" />
+                EL ESTILO{' '}
+                <span className="block text-amber-400 sm:inline">QUE MANDA</span>
+              </motion.h1>
 
-                {/* Corona superior sobre la silla */}
-                <div className="mb-2 px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/40 flex items-center gap-1.5">
-                  <Crown className="w-4 h-4 text-amber-400" />
-                  <span className="text-[11px] font-black uppercase tracking-widest text-amber-400">
-                    Trono VIP King&apos;s
-                  </span>
-                </div>
+              {/* CAPA 2 (z-20): CONTENEDOR FOTOGRÁFICO DE LA SILLA (Superpuesto con margen negativo sobre el título) */}
+              <div className="relative z-20 -mt-6 sm:-mt-12 md:-mt-14 flex items-center justify-center">
+                {/* Sombra de piso de estudio (Floor Contact Shadow) */}
+                <div className="pointer-events-none absolute -bottom-5 left-1/2 -translate-x-1/2 w-64 sm:w-80 h-9 bg-black/65 rounded-full blur-xl" />
 
-                {/* Icono Gigante de Silla de Barbería Iluminada */}
-                <div className="relative flex items-center justify-center my-2">
-                  <Armchair className="w-28 h-28 sm:w-36 sm:h-36 text-amber-400 stroke-[1.6] drop-shadow-[0_0_30px_rgba(251,191,36,0.55)]" />
-                  <Scissors className="w-8 h-8 text-white absolute -bottom-1 -right-2 rotate-[-35deg] drop-shadow" />
-                </div>
+                {/* Contenedor preparado para `/silla-barberia.png` sin fondo + Placeholder realista */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.92, y: 24 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  transition={{ duration: 0.7, delay: 0.15 }}
+                  className="relative w-72 sm:w-80 md:w-96 aspect-[4/5] rounded-3xl flex flex-col items-center justify-center drop-shadow-2xl"
+                >
+                  {!chairImgError ? (
+                    <img
+                      src="/silla-barberia.png"
+                      alt="Silla de Barbería Premium - King's Barber Shop"
+                      onError={() => setChairImgError(true)}
+                      className="w-full h-full object-contain drop-shadow-2xl select-none"
+                    />
+                  ) : (
+                    /* Placeholder Visualmente Atractivo con Proporciones de Silla de Estudio y Silueta Realista */
+                    <div
+                      style={{
+                        background:
+                          'linear-gradient(165deg, rgba(63, 63, 70, 0.55) 0%, rgba(39, 39, 42, 0.88) 55%, rgba(24, 24, 27, 0.96) 100%)'
+                      }}
+                      className="w-full h-full rounded-[2.25rem] border border-white/15 backdrop-blur-md p-6 flex flex-col items-center justify-between shadow-[0_35px_70px_rgba(0,0,0,0.65)] relative overflow-hidden group"
+                    >
+                      {/* Reflejo de lente de estudio */}
+                      <div className="pointer-events-none absolute -top-20 -left-20 w-52 h-52 bg-white/10 rounded-full blur-2xl" />
+                      <div className="pointer-events-none absolute bottom-10 right-6 w-36 h-36 bg-amber-400/15 rounded-full blur-2xl" />
 
-                <span className="mt-3 text-xs sm:text-sm font-black uppercase tracking-widest text-white/90">
-                  Sillas Listas Hoy
-                </span>
-                <span className="text-[11px] font-bold text-amber-400 mt-0.5">
-                  Mascarilla Negra + Masaje Gratis
-                </span>
+                      {/* Header del frame fotográfico */}
+                      <div className="w-full flex items-center justify-between text-[11px] font-bold text-neutral-300 border-b border-white/10 pb-3">
+                        <span className="flex items-center gap-1.5 text-amber-400 font-black uppercase tracking-wider">
+                          <Crown className="w-3.5 h-3.5" /> Silla hidráulica VIP
+                        </span>
+                        <span className="font-mono text-[10px] px-2 py-0.5 rounded bg-white/10 text-neutral-200">
+                          silla-barberia.png
+                        </span>
+                      </div>
 
-                {/* 3 ETIQUETAS (PILLS) FLOTANDO EN BUCLE ASÍNCRONO CONTINUO */}
-                {floatingPills.map((pill) => (
-                  <motion.div
-                    key={pill.id}
-                    animate={{ y: [0, -14, 0] }}
-                    transition={{
-                      duration: pill.duration,
-                      repeat: Infinity,
-                      ease: 'easeInOut',
-                      delay: pill.delay
-                    }}
-                    className={`absolute z-20 ${pill.positionClass} px-4 py-3 sm:px-5 sm:py-3.5 rounded-2xl bg-neutral-900 border-2 border-amber-400 shadow-[0_14px_35px_rgba(0,0,0,0.85)] text-left whitespace-nowrap`}
-                  >
-                    <span className="block text-sm sm:text-base font-black text-white tracking-tight leading-none">
-                      {pill.text}
-                    </span>
-                    <span className="block text-[11px] font-extrabold text-amber-400 uppercase tracking-wider mt-1">
-                      {pill.sub}
-                    </span>
-                  </motion.div>
-                ))}
-              </motion.div>
-            </div>
+                      {/* Silueta Ilustrada de Silla de Barbería Clásica + Respaldo Capitoné */}
+                      <div className="relative my-auto flex flex-col items-center justify-center py-2">
+                        <div className="relative w-44 h-44 sm:w-48 sm:h-48 rounded-full bg-neutral-900/80 border border-amber-400/40 flex items-center justify-center shadow-inner">
+                          {/* Silueta SVG detallada de Silla de Barbería + Icono Armchair */}
+                          <Armchair className="w-28 h-28 sm:w-32 sm:h-32 text-amber-400 stroke-[1.4] drop-shadow-[0_18px_28px_rgba(0,0,0,0.85)]" />
+                          <div className="absolute -bottom-3 px-3.5 py-1 rounded-full bg-amber-400 text-neutral-900 text-[10px] font-black uppercase tracking-widest shadow">
+                            Cuero &amp; Cromo
+                          </div>
+                        </div>
+                      </div>
 
-            {/* BOTÓN PRINCIPAL DEBAJO DE LA SILLA: "Separar Silla Ahora" */}
-            <motion.button
-              type="button"
-              onClick={scrollToFunnel}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.97 }}
-              className="cursor-pointer group px-10 py-5 rounded-2xl bg-amber-400 hover:bg-amber-300 text-neutral-950 font-black text-lg sm:text-xl uppercase tracking-tighter shadow-[0_18px_45px_rgba(251,191,36,0.32)] hover:scale-105 transition-all duration-300 flex items-center gap-3.5"
-            >
-              <span>Separar Silla Ahora</span>
-              <div className="w-8 h-8 rounded-xl bg-neutral-950 text-amber-400 flex items-center justify-center group-hover:translate-x-1 transition-transform">
-                <ChevronRight className="w-5 h-5 stroke-[3]" />
+                      {/* Pie del contenedor de imagen */}
+                      <div className="w-full text-center pt-3 border-t border-white/10">
+                        <p className="text-xs font-extrabold text-white tracking-wide">
+                          Trono Ejecutivo King&apos;s
+                        </p>
+                        <p className="text-[11px] text-neutral-400">
+                          Listo para imagen PNG transparente (`/silla-barberia.png`)
+                        </p>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* CAPA 3 (z-30): 3 ETIQUETAS FLOTANTES ASÍNCRONAS ALREDEDOR DE LA SILLA */}
+                  {floatingPills.map((pill) => {
+                    const PillIcon = pill.icon;
+                    return (
+                      <motion.div
+                        key={pill.id}
+                        animate={{ y: [0, -13, 0] }}
+                        transition={{
+                          duration: pill.duration,
+                          repeat: Infinity,
+                          ease: 'easeInOut',
+                          delay: pill.delay
+                        }}
+                        className={`absolute z-30 ${pill.positionClass} flex items-center gap-3 px-4 py-3 sm:px-5 sm:py-3.5 rounded-2xl bg-neutral-900/95 backdrop-blur-md border border-amber-400/70 shadow-[0_18px_40px_rgba(0,0,0,0.65)] text-left`}
+                      >
+                        <div className="w-9 h-9 rounded-xl bg-amber-400 text-neutral-900 flex items-center justify-center shrink-0">
+                          <PillIcon className="w-4 h-4 stroke-[2.5]" />
+                        </div>
+                        <div className="pr-1">
+                          <span className="block text-xs sm:text-sm font-black text-white leading-tight whitespace-nowrap">
+                            {pill.title}
+                          </span>
+                          <span className="block text-[10px] font-bold text-amber-400 uppercase tracking-wider mt-0.5 whitespace-nowrap">
+                            {pill.sub}
+                          </span>
+                        </div>
+                      </motion.div>
+                    );
+                  })}
+                </motion.div>
               </div>
-            </motion.button>
 
-            {/* Propuesta de Valor Diferenciadora (Adaptada a Dark Studio) */}
+              {/* Subtítulo y CTA debajo de la silla */}
+              <motion.p
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                className="mt-10 text-base sm:text-lg text-neutral-300 max-w-xl text-center font-medium"
+              >
+                Elige tu sede en Nuevo Chimbote o Chimbote Centro y separa tu silla al instante sin hacer colas.
+              </motion.p>
+
+              <motion.button
+                type="button"
+                onClick={scrollToFunnel}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.97 }}
+                className="mt-7 cursor-pointer group px-10 py-5 rounded-2xl bg-amber-400 hover:bg-amber-300 text-neutral-900 font-black text-base sm:text-lg uppercase tracking-tight shadow-[0_18px_45px_rgba(251,191,36,0.28)] transition-all flex items-center gap-3"
+              >
+                <span>Separar Silla Ahora</span>
+                <div className="w-8 h-8 rounded-xl bg-neutral-900 text-amber-400 flex items-center justify-center group-hover:translate-x-1 transition-transform">
+                  <ChevronRight className="w-5 h-5 stroke-[3]" />
+                </div>
+              </motion.button>
+            </div>
+          </div>
+        </section>
+
+        {/* ====================================================================
+            MARQUESINA INFINITA (MARQUEE ANIMADO CON FRAMER-MOTION)
+        ==================================================================== */}
+        <div className="bg-amber-400 text-neutral-900 py-3.5 border-y border-amber-500/40 overflow-hidden select-none">
+          <motion.div
+            animate={{ x: ['0%', '-50%'] }}
+            transition={{ duration: 22, repeat: Infinity, ease: 'linear' }}
+            className="flex whitespace-nowrap w-max"
+          >
+            {marqueeItems.map((text, idx) => (
+              <span
+                key={idx}
+                className="font-black text-sm sm:text-base tracking-tight uppercase px-2"
+              >
+                {text}
+              </span>
+            ))}
+          </motion.div>
+        </div>
+
+        {/* ====================================================================
+            2. SECCIÓN DE INFORMACIÓN Y MARCA ("NUESTRA PROMESA" - FONDO CLARO)
+        ==================================================================== */}
+        <section className="relative bg-neutral-50 text-neutral-800 pt-16 pb-8 sm:pt-24 sm:pb-12 overflow-hidden">
+          {/* Marca de agua tipográfica sutil en el fondo claro */}
+          <div className="pointer-events-none select-none absolute right-4 top-8 opacity-[0.035] hidden lg:block">
+            <span className="font-black text-9xl tracking-tight text-neutral-900">
+              KING&apos;S
+            </span>
+          </div>
+
+          <div className="max-w-4xl mx-auto px-5 sm:px-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.35 }}
-              className="mt-12 w-full max-w-3xl rounded-3xl bg-white/5 backdrop-blur-xl border border-amber-400/30 p-5 sm:p-6 shadow-2xl flex flex-col sm:flex-row items-center gap-4 text-left"
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="bg-white rounded-3xl p-8 sm:p-12 shadow-lg border border-neutral-200/80 relative overflow-hidden"
             >
-              <div className="w-14 h-14 rounded-2xl bg-neutral-900 border border-amber-400 text-amber-400 flex items-center justify-center shrink-0 shadow-[0_0_20px_rgba(251,191,36,0.2)]">
-                <Crown className="w-7 h-7" />
-              </div>
-              <div className="space-y-1 text-center sm:text-left">
-                <div className="inline-flex items-center gap-1.5 text-[11px] font-black uppercase tracking-widest text-amber-400">
-                  <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                  <span>Beneficio Exclusivo King&apos;s Incluido Gratis</span>
+              <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                <div className="space-y-3 max-w-2xl">
+                  <div className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest text-amber-600">
+                    <Crown className="w-4 h-4 text-amber-500" />
+                    <span>Sobre Nosotros • Nuestra Promesa</span>
+                  </div>
+
+                  <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-neutral-900 leading-tight">
+                    Desde 2018, definiendo el estilo en Nuevo Chimbote y el Centro. Liderados por Cristóbal y un equipo experto.
+                  </h2>
+
+                  <p className="text-sm sm:text-base text-neutral-600 font-medium leading-relaxed pt-1">
+                    En <strong className="text-neutral-900">King&apos;s Barber Shop</strong> cada
+                    corte incluye de cortesía nuestra mascarilla facial de puntos negros y masaje
+                    relajante de hombros, combinando precisión técnica con relajación total.
+                  </p>
                 </div>
-                <p className="text-base sm:text-lg font-black text-white leading-snug tracking-tight">
-                  &ldquo;Todos nuestros servicios incluyen mascarilla de puntos negros y masajes
-                  relajantes.&rdquo;
-                </p>
+
+                {/* Sello de Autoridad del Estudio */}
+                <div className="shrink-0 w-full md:w-auto flex md:flex-col items-center justify-between md:justify-center gap-3 p-5 rounded-2xl bg-neutral-50 border border-neutral-200 text-center">
+                  <div className="w-12 h-12 rounded-2xl bg-neutral-900 text-amber-400 flex items-center justify-center font-black text-lg shadow-sm">
+                    +6
+                  </div>
+                  <div>
+                    <span className="block text-sm font-black text-neutral-900">
+                      Años de Maestría
+                    </span>
+                    <span className="block text-xs font-semibold text-neutral-500">
+                      2 Sedes en Chimbote
+                    </span>
+                  </div>
+                </div>
               </div>
             </motion.div>
           </div>
         </section>
 
         {/* ====================================================================
-            2. WIDGET DE RESERVAS CON GLASSMORPHISM PREMIUM Y ANIMACIÓN PROGRESIVA
+            3. WIDGET DE RESERVAS (Adaptado al Fondo Claro `bg-neutral-50`)
         ==================================================================== */}
-        <section ref={funnelRef} className="py-16 sm:py-24 scroll-mt-20 relative">
+        <section ref={funnelRef} className="py-10 sm:py-16 scroll-mt-20 bg-neutral-50">
           <div className="max-w-3xl mx-auto px-5 sm:px-8">
             <AnimatePresence mode="wait">
               {bookingConfirmed ? (
-                /* PANTALLA DE ÉXITO POST-WEBHOOK N8N */
+                /* PANTALLA DE ÉXITO POST-WEBHOOK N8N (Sobre Fondo Claro) */
                 <motion.div
                   key="booking-confirmed"
-                  initial={{ opacity: 0, y: 20, scale: 0.97 }}
+                  initial={{ opacity: 0, y: 20, scale: 0.98 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: -20 }}
                   transition={{ duration: 0.35 }}
-                  className="bg-white/5 backdrop-blur-xl border-2 border-amber-400 rounded-3xl p-7 sm:p-10 shadow-2xl text-center space-y-6"
+                  className="bg-white border-2 border-amber-400 rounded-3xl p-7 sm:p-10 shadow-xl text-center space-y-6"
                 >
-                  <div className="w-20 h-20 rounded-full bg-neutral-900 text-amber-400 border-2 border-amber-400 mx-auto flex items-center justify-center shadow-[0_0_30px_rgba(251,191,36,0.3)]">
+                  <div className="w-20 h-20 rounded-full bg-neutral-900 text-amber-400 ring-8 ring-amber-400/15 mx-auto flex items-center justify-center shadow-lg">
                     <CheckCircle2 className="w-10 h-10" />
                   </div>
 
                   <div className="space-y-2">
-                    <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-emerald-500/15 border border-emerald-400/40 text-emerald-300 text-xs font-extrabold uppercase tracking-wider">
+                    <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-emerald-50 border border-emerald-500/30 text-emerald-700 text-xs font-extrabold uppercase tracking-wider">
                       <Webhook className="w-3.5 h-3.5" /> Webhook n8n Disparado • Cita Sincronizada
                     </span>
-                    <h2 className="text-3xl sm:text-4xl font-black tracking-tighter uppercase text-white">
+                    <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-neutral-900">
                       ¡Reserva Confirmada!
                     </h2>
-                    <p className="text-base sm:text-lg font-bold text-amber-400">
+                    <p className="text-base sm:text-lg font-bold text-amber-600">
                       Te hemos enviado los detalles por WhatsApp
                     </p>
                   </div>
 
                   {/* Resumen del Ticket Confirmado */}
-                  <div className="bg-neutral-900/90 border border-white/10 rounded-2xl p-5 text-left space-y-3 max-w-md mx-auto">
-                    <div className="flex items-center justify-between text-xs border-b border-white/10 pb-2.5">
-                      <span className="font-extrabold uppercase tracking-wider text-neutral-400">
+                  <div className="bg-neutral-50 border border-neutral-200 rounded-2xl p-5 text-left space-y-3 max-w-md mx-auto">
+                    <div className="flex items-center justify-between text-xs border-b border-neutral-200 pb-2.5">
+                      <span className="font-extrabold uppercase tracking-wider text-neutral-500">
                         Resumen de tu Silla
                       </span>
-                      <span className="font-black text-amber-400">{bookingConfirmed.time}</span>
+                      <span className="font-black text-amber-600">{bookingConfirmed.time}</span>
                     </div>
 
                     <div className="space-y-2 text-sm">
                       <div className="flex justify-between">
-                        <span className="text-neutral-400">Cliente:</span>
-                        <strong className="text-white">{bookingConfirmed.clientName}</strong>
+                        <span className="text-neutral-500">Cliente:</span>
+                        <strong className="text-neutral-900">{bookingConfirmed.clientName}</strong>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-neutral-400">Sede:</span>
-                        <strong className="text-white text-right">
+                        <span className="text-neutral-500">Sede:</span>
+                        <strong className="text-neutral-900 text-right">
                           {bookingConfirmed.location}
                         </strong>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-neutral-400">Servicio:</span>
-                        <strong className="text-white">{bookingConfirmed.serviceName}</strong>
+                        <span className="text-neutral-500">Servicio:</span>
+                        <strong className="text-neutral-900">{bookingConfirmed.serviceName}</strong>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-neutral-400">Barbero:</span>
-                        <strong className="text-white">{bookingConfirmed.barberName}</strong>
+                        <span className="text-neutral-500">Barbero:</span>
+                        <strong className="text-neutral-900">{bookingConfirmed.barberName}</strong>
                       </div>
-                      <div className="flex justify-between pt-2 border-t border-white/10 text-base">
-                        <span className="font-bold text-white">Total a pagar en local:</span>
-                        <strong className="font-black text-amber-400">
+                      <div className="flex justify-between pt-2 border-t border-neutral-200 text-base">
+                        <span className="font-bold text-neutral-900">Total a pagar en local:</span>
+                        <strong className="font-black text-amber-600">
                           S/ {bookingConfirmed.price}.00
                         </strong>
                       </div>
                     </div>
 
-                    <div className="bg-amber-400/10 border border-amber-400/30 rounded-xl p-3 text-xs text-amber-300 font-semibold flex items-center gap-2">
-                      <Sparkles className="w-4 h-4 text-amber-400 shrink-0" />
+                    <div className="bg-amber-50 border border-amber-400/40 rounded-xl p-3 text-xs text-neutral-800 font-semibold flex items-center gap-2">
+                      <Sparkles className="w-4 h-4 text-amber-500 shrink-0" />
                       <span>
                         Incluye gratis tu mascarilla de puntos negros y masaje relajante.
                       </span>
@@ -644,41 +759,41 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
                     <button
                       type="button"
                       onClick={handleResetBooking}
-                      className="cursor-pointer flex-1 py-3.5 px-5 rounded-xl border-2 border-white/20 text-white font-extrabold text-sm hover:bg-white/10 transition-all"
+                      className="cursor-pointer flex-1 py-3.5 px-5 rounded-xl border-2 border-neutral-300 text-neutral-800 font-extrabold text-sm hover:bg-neutral-100 transition-all"
                     >
                       Hacer otra reserva
                     </button>
                     <button
                       type="button"
                       onClick={onOpenAdmin}
-                      className="cursor-pointer flex-1 py-3.5 px-5 rounded-xl bg-amber-400 text-neutral-950 font-black text-sm hover:bg-amber-300 transition-all flex items-center justify-center gap-1.5"
+                      className="cursor-pointer flex-1 py-3.5 px-5 rounded-xl bg-neutral-900 text-white font-black text-sm hover:bg-neutral-800 transition-all flex items-center justify-center gap-1.5 shadow-md"
                     >
                       <span>Ver en Monitor Admin</span>
-                      <ArrowUpRight className="w-4 h-4 text-neutral-950" />
+                      <ArrowUpRight className="w-4 h-4 text-amber-400" />
                     </button>
                   </div>
                 </motion.div>
               ) : (
-                /* CONTENEDOR GLASSMORPHISM PREMIUM DEL WIDGET DE RESERVAS */
+                /* CONTENEDOR PRINCIPAL DEL WIDGET DE RESERVAS SOBRE FONDO CLARO */
                 <motion.form
                   key="booking-form"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.45 }}
                   onSubmit={handleConfirmBooking}
-                  className="bg-white/5 backdrop-blur-xl border border-white/10 shadow-2xl rounded-3xl p-6 sm:p-10 space-y-10"
+                  className="bg-white border border-neutral-200/90 shadow-lg rounded-3xl p-6 sm:p-10 space-y-10"
                 >
                   {/* Encabezado del Embudo */}
-                  <div className="flex items-center justify-between border-b border-white/10 pb-6">
+                  <div className="flex items-center justify-between border-b border-neutral-100 pb-6">
                     <div>
-                      <span className="text-xs font-black uppercase tracking-widest text-amber-400 block mb-1">
-                        Reserva Express en 4 Pasos
+                      <span className="text-xs font-black uppercase tracking-widest text-amber-600 block mb-1">
+                        King&apos;s Barber Shop • Reserva Online
                       </span>
-                      <h2 className="text-3xl sm:text-4xl font-black tracking-tighter uppercase text-white">
-                        CONFIGURA TU EXPERIENCIA
+                      <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-neutral-900">
+                        SEPARA TU SILLA EN 4 PASOS
                       </h2>
                     </div>
-                    <div className="w-12 h-12 rounded-2xl bg-neutral-900 border border-amber-400/50 flex items-center justify-center text-amber-400 shrink-0">
+                    <div className="w-12 h-12 rounded-2xl bg-neutral-900 text-amber-400 flex items-center justify-center shrink-0 shadow-sm">
                       <Calendar className="w-6 h-6" />
                     </div>
                   </div>
@@ -691,10 +806,10 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
                     className="space-y-4"
                   >
                     <div className="flex items-center gap-3">
-                      <span className="w-8 h-8 rounded-full bg-amber-400 text-neutral-950 font-black text-sm flex items-center justify-center">
+                      <span className="w-8 h-8 rounded-full bg-neutral-900 text-amber-400 font-black text-sm flex items-center justify-center">
                         1
                       </span>
-                      <h3 className="text-xl font-black tracking-tight uppercase text-white">
+                      <h3 className="text-xl font-black tracking-tight text-neutral-900">
                         Elige tu Sede
                       </h3>
                     </div>
@@ -709,28 +824,36 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
                             onClick={() => setSelectedLocation(loc.id)}
                             className={`cursor-pointer text-left p-5 rounded-2xl border-2 transition-all duration-200 hover:-translate-y-1 flex flex-col justify-between gap-2.5 ${
                               isSelected
-                                ? 'border-amber-400 bg-neutral-900 text-white shadow-[0_0_30px_rgba(251,191,36,0.18)]'
-                                : 'border-white/10 bg-neutral-900/50 text-neutral-200 hover:border-amber-400/50'
+                                ? 'border-neutral-900 bg-neutral-900 text-white shadow-lg ring-2 ring-amber-400/60'
+                                : 'border-neutral-200 bg-white text-neutral-800 shadow-sm hover:border-amber-400 hover:shadow-md'
                             }`}
                           >
                             <div className="flex items-start justify-between w-full gap-2">
                               <span
                                 className={`text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full ${
                                   isSelected
-                                    ? 'bg-amber-400 text-neutral-950'
-                                    : 'bg-white/10 text-neutral-300'
+                                    ? 'bg-amber-400 text-neutral-900'
+                                    : 'bg-neutral-100 text-neutral-600'
                                 }`}
                               >
                                 {loc.tag}
                               </span>
-                              <MapPin className="w-4 h-4 shrink-0 text-amber-400" />
+                              <MapPin className="w-4 h-4 shrink-0 text-amber-500" />
                             </div>
 
                             <div>
-                              <p className="font-black text-base sm:text-lg leading-snug text-white">
+                              <p
+                                className={`font-black text-base sm:text-lg leading-snug ${
+                                  isSelected ? 'text-white' : 'text-neutral-900'
+                                }`}
+                              >
                                 {loc.name}
                               </p>
-                              <p className="text-xs font-semibold text-amber-400/90 mt-1">
+                              <p
+                                className={`text-xs font-semibold mt-1 ${
+                                  isSelected ? 'text-amber-400' : 'text-neutral-500'
+                                }`}
+                              >
                                 {loc.wait}
                               </p>
                             </div>
@@ -740,7 +863,7 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
                     </div>
                   </motion.div>
 
-                  {/* PASO 2: SERVICIOS (Se anima con framer-motion cuando cambia la sede) */}
+                  {/* PASO 2: SERVICIOS (Animado con framer-motion al cambiar sede) */}
                   <motion.div
                     key={`services-step-${selectedLocation}`}
                     initial={{ opacity: 0, y: 20 }}
@@ -750,15 +873,15 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
-                        <span className="w-8 h-8 rounded-full bg-amber-400 text-neutral-950 font-black text-sm flex items-center justify-center">
+                        <span className="w-8 h-8 rounded-full bg-neutral-900 text-amber-400 font-black text-sm flex items-center justify-center">
                           2
                         </span>
-                        <h3 className="text-xl font-black tracking-tight uppercase text-white">
+                        <h3 className="text-xl font-black tracking-tight text-neutral-900">
                           Selecciona tu Servicio
                         </h3>
                       </div>
-                      <span className="text-xs font-black uppercase tracking-wider text-amber-400">
-                        + Mascarilla y Masaje
+                      <span className="text-xs font-black uppercase tracking-wider text-amber-600">
+                        + Mascarilla y Masaje Gratis
                       </span>
                     </div>
 
@@ -772,29 +895,45 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
                             onClick={() => setSelectedService(srv.id)}
                             className={`cursor-pointer text-left p-5 rounded-2xl border-2 transition-all duration-200 hover:-translate-y-1 flex flex-col justify-between gap-3 ${
                               isSelected
-                                ? 'border-amber-400 bg-neutral-900 text-white shadow-[0_0_30px_rgba(251,191,36,0.18)]'
-                                : 'border-white/10 bg-neutral-900/50 text-neutral-200 hover:border-amber-400/50'
+                                ? 'border-neutral-900 bg-neutral-900 text-white shadow-lg ring-2 ring-amber-400/60'
+                                : 'border-neutral-200 bg-white text-neutral-800 shadow-sm hover:border-amber-400 hover:shadow-md'
                             }`}
                           >
                             <div className="space-y-1.5">
                               <div className="flex items-center justify-between gap-2">
-                                <span className="font-black text-base text-white">{srv.name}</span>
+                                <span
+                                  className={`font-black text-base ${
+                                    isSelected ? 'text-white' : 'text-neutral-900'
+                                  }`}
+                                >
+                                  {srv.name}
+                                </span>
                                 <span
                                   className={`text-sm font-black px-2.5 py-0.5 rounded-lg shrink-0 ${
                                     isSelected
-                                      ? 'bg-amber-400 text-neutral-950'
-                                      : 'bg-amber-400/15 text-amber-400 border border-amber-400/30'
+                                      ? 'bg-amber-400 text-neutral-900'
+                                      : 'bg-amber-50 text-amber-700 border border-amber-400/40'
                                   }`}
                                 >
                                   S/ {srv.price}
                                 </span>
                               </div>
-                              <p className="text-xs text-neutral-300 leading-relaxed">
+                              <p
+                                className={`text-xs leading-relaxed ${
+                                  isSelected ? 'text-neutral-300' : 'text-neutral-500'
+                                }`}
+                              >
                                 {srv.subtitle}
                               </p>
                             </div>
 
-                            <div className="text-[11px] font-bold pt-2.5 border-t border-white/10 text-amber-400 flex items-center gap-1">
+                            <div
+                              className={`text-[11px] font-bold pt-2.5 border-t flex items-center gap-1 ${
+                                isSelected
+                                  ? 'border-white/15 text-amber-400'
+                                  : 'border-neutral-100 text-amber-600'
+                              }`}
+                            >
                               <Sparkles className="w-3.5 h-3.5 shrink-0" />
                               <span>{srv.duration} • Mascarilla gratis</span>
                             </div>
@@ -804,7 +943,7 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
                     </div>
                   </motion.div>
 
-                  {/* PASO 3: BARBERO (Se anima al elegir sede o servicio) */}
+                  {/* PASO 3: BARBERO (Animado con framer-motion) */}
                   <motion.div
                     key={`barber-step-${selectedLocation}-${selectedService}`}
                     initial={{ opacity: 0, y: 20 }}
@@ -813,10 +952,10 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
                     className="space-y-4"
                   >
                     <div className="flex items-center gap-3">
-                      <span className="w-8 h-8 rounded-full bg-amber-400 text-neutral-950 font-black text-sm flex items-center justify-center">
+                      <span className="w-8 h-8 rounded-full bg-neutral-900 text-amber-400 font-black text-sm flex items-center justify-center">
                         3
                       </span>
-                      <h3 className="text-xl font-black tracking-tight uppercase text-white">
+                      <h3 className="text-xl font-black tracking-tight text-neutral-900">
                         Elige tu Barbero
                       </h3>
                     </div>
@@ -831,15 +970,15 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
                             onClick={() => setSelectedBarber(barber.id)}
                             className={`cursor-pointer p-4 sm:p-5 rounded-2xl border-2 text-center transition-all duration-200 hover:-translate-y-1 flex flex-col items-center ${
                               isSelected
-                                ? 'border-amber-400 bg-neutral-900 text-white shadow-[0_0_30px_rgba(251,191,36,0.18)]'
-                                : 'border-white/10 bg-neutral-900/50 text-neutral-200 hover:border-amber-400/50'
+                                ? 'border-neutral-900 bg-neutral-900 text-white shadow-lg ring-2 ring-amber-400/60'
+                                : 'border-neutral-200 bg-white text-neutral-800 shadow-sm hover:border-amber-400 hover:shadow-md'
                             }`}
                           >
                             <span
                               className={`text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full mb-3 ${
                                 isSelected
-                                  ? 'bg-amber-400 text-neutral-950'
-                                  : 'bg-white/10 text-amber-400'
+                                  ? 'bg-amber-400 text-neutral-900'
+                                  : 'bg-amber-50 text-amber-700 border border-amber-400/30'
                               }`}
                             >
                               {barber.badge}
@@ -848,20 +987,28 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
                             <div
                               className={`w-14 h-14 rounded-full flex items-center justify-center text-base font-black mb-2 ring-2 ${
                                 isSelected
-                                  ? 'bg-amber-400 text-neutral-950 ring-amber-200'
-                                  : 'bg-neutral-950 text-amber-400 ring-amber-400/40'
+                                  ? 'bg-amber-400 text-neutral-900 ring-amber-200'
+                                  : 'bg-neutral-900 text-amber-400 ring-amber-400/40'
                               }`}
                             >
                               {barber.initials}
                             </div>
 
-                            <p className="font-black text-sm sm:text-base text-white">
+                            <p
+                              className={`font-black text-sm sm:text-base ${
+                                isSelected ? 'text-white' : 'text-neutral-900'
+                              }`}
+                            >
                               {barber.name}
                             </p>
-                            <p className="text-[11px] text-neutral-400 mt-0.5 line-clamp-1">
+                            <p
+                              className={`text-[11px] mt-0.5 line-clamp-1 ${
+                                isSelected ? 'text-neutral-300' : 'text-neutral-500'
+                              }`}
+                            >
                               {barber.role}
                             </p>
-                            <span className="text-xs font-black text-amber-400 mt-1.5 flex items-center gap-0.5">
+                            <span className="text-xs font-black text-amber-500 mt-1.5 flex items-center gap-0.5">
                               ★ {barber.rating}
                             </span>
                           </button>
@@ -870,7 +1017,7 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
                     </div>
                   </motion.div>
 
-                  {/* PASO 4: HORARIO + CONTACTO (Se anima con framer-motion cuando selecciona barbero o sede) */}
+                  {/* PASO 4: HORARIO + CONTACTO (Animado con framer-motion al seleccionar barbero) */}
                   <motion.div
                     key={`time-step-${selectedLocation}-${selectedBarber}`}
                     initial={{ opacity: 0, y: 20 }}
@@ -880,14 +1027,14 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
-                        <span className="w-8 h-8 rounded-full bg-amber-400 text-neutral-950 font-black text-sm flex items-center justify-center">
+                        <span className="w-8 h-8 rounded-full bg-neutral-900 text-amber-400 font-black text-sm flex items-center justify-center">
                           4
                         </span>
-                        <h3 className="text-xl font-black tracking-tight uppercase text-white">
+                        <h3 className="text-xl font-black tracking-tight text-neutral-900">
                           Selecciona Horario
                         </h3>
                       </div>
-                      <span className="text-xs text-amber-400 font-bold uppercase tracking-wider">
+                      <span className="text-xs text-neutral-500 font-bold uppercase tracking-wider">
                         Turnos de hoy
                       </span>
                     </div>
@@ -902,13 +1049,13 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
                             onClick={() => setSelectedTime(slot)}
                             className={`cursor-pointer py-3.5 px-3 rounded-xl border-2 font-black text-xs sm:text-sm transition-all duration-200 hover:-translate-y-0.5 flex items-center justify-center gap-1.5 ${
                               isSelected
-                                ? 'border-amber-400 bg-amber-400 text-neutral-950 shadow-[0_0_20px_rgba(251,191,36,0.3)]'
-                                : 'border-white/10 bg-neutral-900/60 text-white hover:border-amber-400/50'
+                                ? 'border-neutral-900 bg-neutral-900 text-white shadow-md ring-2 ring-amber-400/60'
+                                : 'border-neutral-200 bg-white text-neutral-800 shadow-sm hover:border-amber-400'
                             }`}
                           >
                             <Clock
                               className={`w-3.5 h-3.5 ${
-                                isSelected ? 'text-neutral-950' : 'text-amber-400'
+                                isSelected ? 'text-amber-400' : 'text-amber-500'
                               }`}
                             />
                             <span>{slot}</span>
@@ -917,10 +1064,10 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
                       })}
                     </div>
 
-                    {/* Inputs para confirmación por WhatsApp */}
+                    {/* Inputs limpios sobre fondo claro */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-3">
                       <div>
-                        <label className="text-xs font-extrabold uppercase tracking-wider text-neutral-300 block mb-1.5">
+                        <label className="text-xs font-extrabold uppercase tracking-wider text-neutral-600 block mb-1.5">
                           Tu Nombre
                         </label>
                         <input
@@ -928,11 +1075,11 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
                           placeholder="Ej. Sebastián Rojas"
                           value={clientName}
                           onChange={(e) => setClientName(e.target.value)}
-                          className="w-full px-4 py-3.5 rounded-xl bg-neutral-900/90 border border-white/15 focus:border-amber-400 outline-none text-sm font-bold text-white placeholder:text-neutral-500"
+                          className="w-full px-4 py-3.5 rounded-xl bg-neutral-50 border border-neutral-300 focus:bg-white focus:border-neutral-900 outline-none text-sm font-bold text-neutral-900 placeholder:text-neutral-400 transition-colors"
                         />
                       </div>
                       <div>
-                        <label className="text-xs font-extrabold uppercase tracking-wider text-neutral-300 block mb-1.5">
+                        <label className="text-xs font-extrabold uppercase tracking-wider text-neutral-600 block mb-1.5">
                           Tu WhatsApp (Para enviarte el ticket)
                         </label>
                         <input
@@ -940,20 +1087,20 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
                           placeholder="Ej. 943 123 456"
                           value={clientPhone}
                           onChange={(e) => setClientPhone(e.target.value)}
-                          className="w-full px-4 py-3.5 rounded-xl bg-neutral-900/90 border border-white/15 focus:border-amber-400 outline-none text-sm font-bold text-white placeholder:text-neutral-500"
+                          className="w-full px-4 py-3.5 rounded-xl bg-neutral-50 border border-neutral-300 focus:bg-white focus:border-neutral-900 outline-none text-sm font-bold text-neutral-900 placeholder:text-neutral-400 transition-colors"
                         />
                       </div>
                     </div>
                   </motion.div>
 
-                  {/* Resumen Pre-Confirmación y CTA Principal */}
+                  {/* Resumen Pre-Confirmación y Botón Principal */}
                   <div className="pt-2 space-y-4">
-                    <div className="bg-neutral-900/90 border border-white/15 rounded-2xl p-5 flex flex-wrap items-center justify-between gap-3">
+                    <div className="bg-neutral-50 border border-neutral-200 rounded-2xl p-5 flex flex-wrap items-center justify-between gap-3">
                       <div className="text-xs sm:text-sm space-y-1">
-                        <p className="font-black text-base text-white">
+                        <p className="font-black text-base text-neutral-900">
                           {currentSrvObj.name} con {currentBrbObj.name} ({currentBrbObj.badge})
                         </p>
-                        <p className="text-xs font-semibold text-neutral-300">
+                        <p className="text-xs font-semibold text-neutral-500">
                           📍 {currentLocObj.shortName} • ⏰ {selectedTime} • ✨ Incluye mascarilla y
                           masaje
                         </p>
@@ -962,7 +1109,7 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
                         <span className="text-xs font-bold uppercase tracking-wider text-neutral-400 block">
                           Total
                         </span>
-                        <span className="text-2xl font-black text-amber-400">
+                        <span className="text-2xl font-black text-neutral-900">
                           S/ {currentSrvObj.price}.00
                         </span>
                       </div>
@@ -970,21 +1117,21 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
 
                     <motion.button
                       type="submit"
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
+                      whileHover={{ scale: 1.01 }}
+                      whileTap={{ scale: 0.99 }}
                       disabled={isSendingWebhook}
-                      className="cursor-pointer w-full py-5 px-6 rounded-2xl bg-amber-400 hover:bg-amber-300 text-neutral-950 font-black text-base sm:text-xl uppercase tracking-tighter shadow-[0_14px_35px_rgba(251,191,36,0.3)] transition-all duration-300 flex items-center justify-center gap-3 disabled:opacity-70"
+                      className="cursor-pointer w-full py-5 px-6 rounded-2xl bg-neutral-900 hover:bg-neutral-800 text-white font-black text-base sm:text-xl uppercase tracking-tight shadow-xl transition-all duration-300 flex items-center justify-center gap-3 disabled:opacity-70"
                     >
                       {isSendingWebhook ? (
                         <>
-                          <RefreshCw className="w-5 h-5 text-neutral-950 animate-spin" />
+                          <RefreshCw className="w-5 h-5 text-amber-400 animate-spin" />
                           <span>Sincronizando con n8n &amp; WhatsApp...</span>
                         </>
                       ) : (
                         <>
-                          <MessageCircle className="w-6 h-6 text-neutral-950 stroke-[2.5]" />
+                          <MessageCircle className="w-6 h-6 text-amber-400 stroke-[2.5]" />
                           <span>Confirmar Reserva Instantánea</span>
-                          <ChevronRight className="w-6 h-6 text-neutral-950 stroke-[2.75]" />
+                          <ChevronRight className="w-6 h-6 text-amber-400 stroke-[2.75]" />
                         </>
                       )}
                     </motion.button>
@@ -999,20 +1146,20 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
       {/* ====================================================================
           FOOTER CON BOTÓN DISCRETO DE "Login Admin"
       ==================================================================== */}
-      <footer className="bg-neutral-950 border-t border-white/10 py-8">
-        <div className="max-w-6xl mx-auto px-5 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-neutral-400">
+      <footer className="bg-white border-t border-neutral-200 py-8">
+        <div className="max-w-6xl mx-auto px-5 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-neutral-500">
           <div className="flex items-center gap-2">
-            <Crown className="w-4 h-4 text-amber-400" />
-            <span className="font-black text-white">King&apos;s Barber Shop</span>
-            <span>• Nuevo Chimbote &amp; Chimbote Centro</span>
+            <Crown className="w-4 h-4 text-amber-500" />
+            <span className="font-black text-neutral-900">King&apos;s Barber Shop</span>
+            <span>• Desde 2018 en Nuevo Chimbote &amp; Chimbote Centro</span>
           </div>
 
           <button
             type="button"
             onClick={onOpenAdmin}
-            className="cursor-pointer inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-neutral-400 hover:text-white hover:bg-white/5 border border-transparent hover:border-white/10 transition-colors font-bold"
+            className="cursor-pointer inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-neutral-500 hover:text-neutral-900 hover:bg-neutral-100 transition-colors font-bold"
           >
-            <Lock className="w-3.5 h-3.5 text-amber-400" />
+            <Lock className="w-3.5 h-3.5 text-amber-500" />
             <span>Login Admin</span>
           </button>
         </div>
@@ -1940,7 +2087,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-neutral-950 text-white">
+    <div className="min-h-screen bg-neutral-50 text-neutral-800">
       {currentView === 'public' ? (
         <PublicBookingView
           onNewBooking={handleAddBookingFromPublic}
