@@ -295,7 +295,6 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
   const [selectedTime, setSelectedTime] = useState(TIME_SLOTS[2]);
   const [clientName, setClientName] = useState('');
   const [clientPhone, setClientPhone] = useState('');
-  const [chairImgError, setChairImgError] = useState(false);
 
   // Estados de disparo de Webhook a n8n y pantalla de éxito
   const [isSendingWebhook, setIsSendingWebhook] = useState(false);
@@ -465,87 +464,39 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
             </motion.div>
 
             {/* COMPOSICIÓN CON SUPERPOSICIÓN DE CAPAS (Z-INDEX):
-                Capa 1 (z-10): Título gigante "EL ESTILO QUE MANDA"
-                Capa 2 (z-20): Imagen Central Fotográfica de Silla de Barbería superpuesta parcialmente delante del titular
-                Capa 3 (z-30): 3 Etiquetas flotantes asíncronas */}
+                Capa 1 (z-0): Título gigante "EL ESTILO QUE MANDA"
+                Capa 2 (z-10): Imagen Real de la Silla de Barbería (/silla.png)
+                Capa 3 (z-20): 3 Etiquetas flotantes con framer-motion */}
             <div className="relative w-full flex flex-col items-center pt-2 sm:pt-4">
-              {/* CAPA 1 (z-10): TÍTULO GIGANTE DETRÁS DE LA SILLA */}
+              {/* CAPA 1: TÍTULO GIGANTE DETRÁS DE LA SILLA */}
               <motion.h1
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.65 }}
-                className="relative z-10 text-center font-black tracking-tight uppercase text-5xl sm:text-7xl md:text-8xl lg:text-[6.8rem] leading-[0.88] text-white select-none max-w-5xl"
+                className="relative z-0 text-center font-black tracking-tight uppercase text-5xl sm:text-7xl md:text-8xl lg:text-[6.8rem] leading-[0.88] text-white select-none max-w-5xl"
               >
                 EL ESTILO{' '}
                 <span className="block text-amber-400 sm:inline">QUE MANDA</span>
               </motion.h1>
 
-              {/* CAPA 2 (z-20): CONTENEDOR FOTOGRÁFICO DE LA SILLA (Superpuesto con margen negativo sobre el título) */}
-              <div className="relative z-20 -mt-6 sm:-mt-12 md:-mt-14 flex items-center justify-center">
+              {/* CAPA 2 & 3: CONTENEDOR DE LA SILLA REAL CON ETIQUETAS FLOTANTES */}
+              <div className="relative z-10 -mt-6 sm:-mt-12 md:-mt-14 flex items-center justify-center">
                 {/* Sombra de piso de estudio (Floor Contact Shadow) */}
-                <div className="pointer-events-none absolute -bottom-5 left-1/2 -translate-x-1/2 w-64 sm:w-80 h-9 bg-black/65 rounded-full blur-xl" />
+                <div className="pointer-events-none absolute -bottom-5 left-1/2 -translate-x-1/2 w-64 sm:w-80 h-9 bg-black/65 rounded-full blur-xl z-0" />
 
-                {/* Contenedor preparado para `/silla-barberia.png` sin fondo + Placeholder realista */}
                 <motion.div
                   initial={{ opacity: 0, scale: 0.92, y: 24 }}
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   transition={{ duration: 0.7, delay: 0.15 }}
-                  className="relative w-72 sm:w-80 md:w-96 aspect-[4/5] rounded-3xl flex flex-col items-center justify-center drop-shadow-2xl"
+                  className="relative flex items-center justify-center"
                 >
-                  {!chairImgError ? (
-                    <img
-                      src="/silla-barberia.png"
-                      alt="Silla de Barbería Premium - King's Barber Shop"
-                      onError={() => setChairImgError(true)}
-                      className="w-full h-full object-contain drop-shadow-2xl select-none"
-                    />
-                  ) : (
-                    /* Placeholder Visualmente Atractivo con Proporciones de Silla de Estudio y Silueta Realista */
-                    <div
-                      style={{
-                        background:
-                          'linear-gradient(165deg, rgba(63, 63, 70, 0.55) 0%, rgba(39, 39, 42, 0.88) 55%, rgba(24, 24, 27, 0.96) 100%)'
-                      }}
-                      className="w-full h-full rounded-[2.25rem] border border-white/15 backdrop-blur-md p-6 flex flex-col items-center justify-between shadow-[0_35px_70px_rgba(0,0,0,0.65)] relative overflow-hidden group"
-                    >
-                      {/* Reflejo de lente de estudio */}
-                      <div className="pointer-events-none absolute -top-20 -left-20 w-52 h-52 bg-white/10 rounded-full blur-2xl" />
-                      <div className="pointer-events-none absolute bottom-10 right-6 w-36 h-36 bg-amber-400/15 rounded-full blur-2xl" />
+                  <img
+                    src="/silla.png"
+                    alt="Silla King's Barber Shop"
+                    className="w-72 md:w-96 object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-10"
+                  />
 
-                      {/* Header del frame fotográfico */}
-                      <div className="w-full flex items-center justify-between text-[11px] font-bold text-neutral-300 border-b border-white/10 pb-3">
-                        <span className="flex items-center gap-1.5 text-amber-400 font-black uppercase tracking-wider">
-                          <Crown className="w-3.5 h-3.5" /> Silla hidráulica VIP
-                        </span>
-                        <span className="font-mono text-[10px] px-2 py-0.5 rounded bg-white/10 text-neutral-200">
-                          silla-barberia.png
-                        </span>
-                      </div>
-
-                      {/* Silueta Ilustrada de Silla de Barbería Clásica + Respaldo Capitoné */}
-                      <div className="relative my-auto flex flex-col items-center justify-center py-2">
-                        <div className="relative w-44 h-44 sm:w-48 sm:h-48 rounded-full bg-neutral-900/80 border border-amber-400/40 flex items-center justify-center shadow-inner">
-                          {/* Silueta SVG detallada de Silla de Barbería + Icono Armchair */}
-                          <Armchair className="w-28 h-28 sm:w-32 sm:h-32 text-amber-400 stroke-[1.4] drop-shadow-[0_18px_28px_rgba(0,0,0,0.85)]" />
-                          <div className="absolute -bottom-3 px-3.5 py-1 rounded-full bg-amber-400 text-neutral-900 text-[10px] font-black uppercase tracking-widest shadow">
-                            Cuero &amp; Cromo
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Pie del contenedor de imagen */}
-                      <div className="w-full text-center pt-3 border-t border-white/10">
-                        <p className="text-xs font-extrabold text-white tracking-wide">
-                          Trono Ejecutivo King&apos;s
-                        </p>
-                        <p className="text-[11px] text-neutral-400">
-                          Listo para imagen PNG transparente (`/silla-barberia.png`)
-                        </p>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* CAPA 3 (z-30): 3 ETIQUETAS FLOTANTES ASÍNCRONAS ALREDEDOR DE LA SILLA */}
+                  {/* CAPA 3 (z-20): 3 ETIQUETAS FLOTANTES CON FRAMER-MOTION */}
                   {floatingPills.map((pill) => {
                     const PillIcon = pill.icon;
                     return (
@@ -558,7 +509,7 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
                           ease: 'easeInOut',
                           delay: pill.delay
                         }}
-                        className={`absolute z-30 ${pill.positionClass} flex items-center gap-3 px-4 py-3 sm:px-5 sm:py-3.5 rounded-2xl bg-neutral-900/95 backdrop-blur-md border border-amber-400/70 shadow-[0_18px_40px_rgba(0,0,0,0.65)] text-left`}
+                        className={`absolute z-20 ${pill.positionClass} flex items-center gap-3 px-4 py-3 sm:px-5 sm:py-3.5 rounded-2xl bg-neutral-900/95 backdrop-blur-md border border-amber-400/70 shadow-[0_18px_40px_rgba(0,0,0,0.65)] text-left`}
                       >
                         <div className="w-9 h-9 rounded-xl bg-amber-400 text-neutral-900 flex items-center justify-center shrink-0">
                           <PillIcon className="w-4 h-4 stroke-[2.5]" />
