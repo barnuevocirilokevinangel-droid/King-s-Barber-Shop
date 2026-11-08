@@ -350,14 +350,14 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
     setClientPhone('');
   };
 
-  // 3 Etiquetas Flotantes alrededor de la Silla Fotográfica
+  // 3 Etiquetas Flotantes alrededor de la Silla Fotográfica Masiva
   const floatingPills = [
     {
       id: 'pill-mascarilla',
       title: 'Mascarilla y masajes incluidos',
       sub: 'Ventaja Competitiva King’s',
       icon: Sparkles,
-      positionClass: 'top-4 -left-3 sm:top-10 sm:-left-28 md:-left-36',
+      positionClass: 'top-6 left-2 sm:top-12 sm:left-4 md:left-8 lg:left-12',
       duration: 3.6,
       delay: 0
     },
@@ -366,7 +366,7 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
       title: 'Desde S/ 15',
       sub: 'Rituales & Cortes Premium',
       icon: Star,
-      positionClass: 'top-1/3 -right-3 sm:top-2/5 sm:-right-24 md:-right-32',
+      positionClass: 'top-1/3 right-2 sm:top-1/3 sm:right-4 md:right-8 lg:right-12',
       duration: 4.1,
       delay: 0.7
     },
@@ -375,7 +375,7 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
       title: 'Bioseguridad Garantizada',
       sub: 'Esterilización UV & Navaja Nueva',
       icon: ShieldCheck,
-      positionClass: 'bottom-6 -left-2 sm:bottom-10 sm:-left-24 md:-left-28',
+      positionClass: 'bottom-8 left-2 sm:bottom-14 sm:left-6 md:left-10 lg:left-16',
       duration: 4.5,
       delay: 1.3
     }
@@ -391,27 +391,24 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
           BARRA DE NAVEGACIÓN SUPERIOR (Gris Carbón Fotográfico)
       ==================================================================== */}
       <header className="sticky top-0 z-40 bg-neutral-900/90 backdrop-blur-xl border-b border-white/10">
-        <div className="max-w-6xl mx-auto px-5 sm:px-8 h-20 flex items-center justify-between">
+        <div className="max-w-6xl mx-auto px-5 sm:px-8 py-2 flex items-center justify-between">
           <div className="flex items-center gap-3.5">
-            <div className="w-11 h-11 rounded-2xl bg-zinc-800 flex items-center justify-center border border-amber-400/60 shadow-md">
-              <Crown className="w-5 h-5 text-amber-400" />
-            </div>
-            <div>
-              <span className="font-black text-lg tracking-tight text-white block leading-none">
-                KING&apos;S BARBER SHOP
-              </span>
-              <span className="text-[11px] font-bold text-amber-400 tracking-widest uppercase mt-1 block">
-                Estudio de Barbería • Est. 2018
-              </span>
-            </div>
+            <img
+              src="/logo.png"
+              alt="King's Barber Shop Logo"
+              className="h-20 w-auto object-contain hover:scale-105 transition-transform"
+            />
+            <span className="text-xs tracking-widest text-amber-400 font-semibold uppercase hidden min-[480px]:inline-block">
+              ESTUDIO DE BARBERÍA • EST. 2018
+            </span>
           </div>
 
           <motion.button
             type="button"
-            whileHover={{ scale: 1.04 }}
-            whileTap={{ scale: 0.96 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             onClick={scrollToFunnel}
-            className="cursor-pointer px-5 py-2.5 rounded-2xl bg-amber-400 text-neutral-900 text-xs sm:text-sm font-black uppercase tracking-tight hover:bg-amber-300 transition-colors flex items-center gap-2 shadow-lg"
+            className="cursor-pointer px-5 sm:px-6 py-2.5 rounded-2xl bg-amber-400 text-neutral-900 text-xs sm:text-sm font-black uppercase tracking-tight hover:bg-amber-300 transition-colors flex items-center gap-2 shadow-lg border border-amber-300/80"
           >
             <Scissors className="w-4 h-4 text-neutral-900 stroke-[2.5]" />
             <span>Separar Silla</span>
@@ -465,35 +462,36 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
 
             {/* COMPOSICIÓN CON SUPERPOSICIÓN DE CAPAS (Z-INDEX):
                 Capa 1 (z-0): Título gigante "EL ESTILO QUE MANDA"
-                Capa 2 (z-10): Imagen Real de la Silla de Barbería (/silla.png)
-                Capa 3 (z-20): 3 Etiquetas flotantes con framer-motion */}
+                Capa 2 (z-10): Imagen Real Masiva Silla y Barbero (/silla.png)
+                Capa 3 (z-20): 3 Etiquetas flotantes orbitando con framer-motion */}
             <div className="relative w-full flex flex-col items-center pt-2 sm:pt-4">
-              {/* CAPA 1: TÍTULO GIGANTE DETRÁS DE LA SILLA */}
+              {/* CAPA 1: TÍTULO GIGANTE DETRÁS DE LA SILLA (Entrada coordinada) */}
               <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.65 }}
-                className="relative z-0 text-center font-black tracking-tight uppercase text-5xl sm:text-7xl md:text-8xl lg:text-[6.8rem] leading-[0.88] text-white select-none max-w-5xl"
+                initial={{ opacity: 0, y: 30, scale: 0.96 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
+                className="relative z-0 text-center font-black tracking-tight uppercase text-5xl sm:text-7xl md:text-8xl lg:text-[7.2rem] leading-[0.88] text-white select-none max-w-6xl"
               >
                 EL ESTILO{' '}
                 <span className="block text-amber-400 sm:inline">QUE MANDA</span>
               </motion.h1>
 
-              {/* CAPA 2 & 3: CONTENEDOR DE LA SILLA REAL CON ETIQUETAS FLOTANTES */}
-              <div className="relative z-10 -mt-6 sm:-mt-12 md:-mt-14 flex items-center justify-center">
-                {/* Sombra de piso de estudio (Floor Contact Shadow) */}
-                <div className="pointer-events-none absolute -bottom-5 left-1/2 -translate-x-1/2 w-64 sm:w-80 h-9 bg-black/65 rounded-full blur-xl z-0" />
+              {/* CAPA 2 & 3: CONTENEDOR DE LA SILLA GIGANTE CON ETIQUETAS FLOTANTES */}
+              <div className="relative z-10 -mt-8 sm:-mt-14 md:-mt-20 lg:-mt-24 flex items-center justify-center w-full">
+                {/* Sombra de piso de estudio y resplandor dorado sutil */}
+                <div className="pointer-events-none absolute -bottom-8 left-1/2 -translate-x-1/2 w-96 sm:w-[36rem] md:w-[48rem] lg:w-[58rem] h-16 bg-black/85 rounded-full blur-3xl z-0" />
+                <div className="pointer-events-none absolute -bottom-4 left-1/2 -translate-x-1/2 w-80 sm:w-[30rem] md:w-[40rem] h-12 bg-amber-500/10 rounded-full blur-2xl z-0" />
 
                 <motion.div
-                  initial={{ opacity: 0, scale: 0.92, y: 24 }}
+                  initial={{ opacity: 0, scale: 0.88, y: 40 }}
                   animate={{ opacity: 1, scale: 1, y: 0 }}
-                  transition={{ duration: 0.7, delay: 0.15 }}
-                  className="relative flex items-center justify-center"
+                  transition={{ duration: 0.95, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+                  className="relative flex items-center justify-center max-w-full"
                 >
                   <img
                     src="/silla.png"
-                    alt="Silla King's Barber Shop"
-                    className="w-72 md:w-96 object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-10"
+                    alt="Silla y Barbero King's Barber Shop"
+                    className="w-[42rem] md:w-[56rem] lg:w-[64rem] h-auto object-contain drop-shadow-[0_35px_60px_rgba(251,191,36,0.15)] z-10 select-none pointer-events-none"
                   />
 
                   {/* CAPA 3 (z-20): 3 ETIQUETAS FLOTANTES CON FRAMER-MOTION */}
@@ -530,10 +528,10 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
 
               {/* Subtítulo y CTA debajo de la silla */}
               <motion.p
-                initial={{ opacity: 0, y: 16 }}
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-                className="mt-10 text-base sm:text-lg text-neutral-300 max-w-xl text-center font-medium"
+                transition={{ duration: 0.7, delay: 0.35, ease: 'easeOut' }}
+                className="mt-8 sm:mt-12 text-base sm:text-lg text-neutral-300 max-w-xl text-center font-medium"
               >
                 Elige tu sede en Nuevo Chimbote o Chimbote Centro y separa tu silla al instante sin hacer colas.
               </motion.p>
@@ -541,6 +539,9 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
               <motion.button
                 type="button"
                 onClick={scrollToFunnel}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.45, ease: 'easeOut' }}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.97 }}
                 className="mt-7 cursor-pointer group px-10 py-5 rounded-2xl bg-amber-400 hover:bg-amber-300 text-neutral-900 font-black text-base sm:text-lg uppercase tracking-tight shadow-[0_18px_45px_rgba(251,191,36,0.28)] transition-all flex items-center gap-3"
@@ -555,9 +556,15 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
         </section>
 
         {/* ====================================================================
-            MARQUESINA INFINITA (MARQUEE ANIMADO CON FRAMER-MOTION)
+            MARQUESINA INFINITA (MARQUEE ANIMADO CON FRAMER-MOTION AL SCROLLEAR)
         ==================================================================== */}
-        <div className="bg-amber-400 text-neutral-900 py-3.5 border-y border-amber-500/40 overflow-hidden select-none">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-100px' }}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
+          className="bg-amber-400 text-neutral-900 py-3.5 border-y border-amber-500/40 overflow-hidden select-none"
+        >
           <motion.div
             animate={{ x: ['0%', '-50%'] }}
             transition={{ duration: 22, repeat: Infinity, ease: 'linear' }}
@@ -572,7 +579,7 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
               </span>
             ))}
           </motion.div>
-        </div>
+        </motion.div>
 
         {/* ====================================================================
             2. SECCIÓN DE INFORMACIÓN Y MARCA ("NUESTRA PROMESA" - FONDO CLARO)
@@ -587,14 +594,20 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
 
           <div className="max-w-4xl mx-auto px-5 sm:px-8">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
+              viewport={{ once: true, margin: '-100px' }}
+              transition={{ duration: 0.8, ease: 'easeOut' }}
               className="bg-white rounded-3xl p-8 sm:p-12 shadow-lg border border-neutral-200/80 relative overflow-hidden"
             >
               <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-                <div className="space-y-3 max-w-2xl">
+                <motion.div
+                  initial={{ opacity: 0, x: -25 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.7, delay: 0.1, ease: 'easeOut' }}
+                  className="space-y-3 max-w-2xl"
+                >
                   <div className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest text-amber-600">
                     <Crown className="w-4 h-4 text-amber-500" />
                     <span>Sobre Nosotros • Nuestra Promesa</span>
@@ -609,10 +622,17 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
                     corte incluye de cortesía nuestra mascarilla facial de puntos negros y masaje
                     relajante de hombros, combinando precisión técnica con relajación total.
                   </p>
-                </div>
+                </motion.div>
 
-                {/* Sello de Autoridad del Estudio */}
-                <div className="shrink-0 w-full md:w-auto flex md:flex-col items-center justify-between md:justify-center gap-3 p-5 rounded-2xl bg-neutral-50 border border-neutral-200 text-center">
+                {/* Sello de Autoridad del Estudio (con delay escalonado / staggered) */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9, y: 25 }}
+                  whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.7, delay: 0.3, ease: 'easeOut' }}
+                  whileHover={{ scale: 1.04 }}
+                  className="shrink-0 w-full md:w-auto flex md:flex-col items-center justify-between md:justify-center gap-3 p-5 rounded-2xl bg-neutral-50 border border-neutral-200 hover:border-amber-400/50 transition-colors text-center shadow-sm"
+                >
                   <div className="w-12 h-12 rounded-2xl bg-neutral-900 text-amber-400 flex items-center justify-center font-black text-lg shadow-sm">
                     +6
                   </div>
@@ -624,7 +644,7 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
                       2 Sedes en Chimbote
                     </span>
                   </div>
-                </div>
+                </motion.div>
               </div>
             </motion.div>
           </div>
@@ -728,14 +748,21 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
                 /* CONTENEDOR PRINCIPAL DEL WIDGET DE RESERVAS SOBRE FONDO CLARO */
                 <motion.form
                   key="booking-form"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.45 }}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-100px' }}
+                  transition={{ duration: 0.8, ease: 'easeOut' }}
                   onSubmit={handleConfirmBooking}
-                  className="bg-white border border-neutral-200/90 shadow-lg rounded-3xl p-6 sm:p-10 space-y-10"
+                  className="bg-white border border-neutral-200/90 shadow-xl rounded-3xl p-6 sm:p-10 space-y-10"
                 >
                   {/* Encabezado del Embudo */}
-                  <div className="flex items-center justify-between border-b border-neutral-100 pb-6">
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, ease: 'easeOut' }}
+                    className="flex items-center justify-between border-b border-neutral-100 pb-6"
+                  >
                     <div>
                       <span className="text-xs font-black uppercase tracking-widest text-amber-600 block mb-1">
                         King&apos;s Barber Shop • Reserva Online
@@ -747,13 +774,14 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
                     <div className="w-12 h-12 rounded-2xl bg-neutral-900 text-amber-400 flex items-center justify-center shrink-0 shadow-sm">
                       <Calendar className="w-6 h-6" />
                     </div>
-                  </div>
+                  </motion.div>
 
-                  {/* PASO 1: SEDE */}
+                  {/* PASO 1: SEDE (Cascada con delay inicial) */}
                   <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.35 }}
+                    initial={{ opacity: 0, y: 35 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: '-50px' }}
+                    transition={{ duration: 0.7, delay: 0.1, ease: 'easeOut' }}
                     className="space-y-4"
                   >
                     <div className="flex items-center gap-3">
@@ -766,22 +794,28 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      {LOCATIONS.map((loc) => {
+                      {LOCATIONS.map((loc, idx) => {
                         const isSelected = selectedLocation === loc.id;
                         return (
-                          <button
+                          <motion.button
                             key={loc.id}
                             type="button"
                             onClick={() => setSelectedLocation(loc.id)}
-                            className={`cursor-pointer text-left p-5 rounded-2xl border-2 transition-all duration-200 hover:-translate-y-1 flex flex-col justify-between gap-2.5 ${
+                            whileHover={{ y: -4, scale: 1.01 }}
+                            whileTap={{ scale: 0.98 }}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.5, delay: idx * 0.1 }}
+                            className={`cursor-pointer text-left p-5 rounded-2xl border-2 transition-all duration-300 flex flex-col justify-between gap-2.5 ${
                               isSelected
-                                ? 'border-neutral-900 bg-neutral-900 text-white shadow-lg ring-2 ring-amber-400/60'
-                                : 'border-neutral-200 bg-white text-neutral-800 shadow-sm hover:border-amber-400 hover:shadow-md'
+                                ? 'border-neutral-900 bg-neutral-900 text-white shadow-xl ring-2 ring-amber-400'
+                                : 'border-neutral-200 bg-white text-neutral-800 shadow-sm hover:border-amber-400 hover:shadow-lg'
                             }`}
                           >
                             <div className="flex items-start justify-between w-full gap-2">
                               <span
-                                className={`text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full ${
+                                className={`text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full transition-colors ${
                                   isSelected
                                     ? 'bg-amber-400 text-neutral-900'
                                     : 'bg-neutral-100 text-neutral-600'
@@ -794,32 +828,33 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
 
                             <div>
                               <p
-                                className={`font-black text-base sm:text-lg leading-snug ${
+                                className={`font-black text-base sm:text-lg leading-snug transition-colors ${
                                   isSelected ? 'text-white' : 'text-neutral-900'
                                 }`}
                               >
                                 {loc.name}
                               </p>
                               <p
-                                className={`text-xs font-semibold mt-1 ${
+                                className={`text-xs font-semibold mt-1 transition-colors ${
                                   isSelected ? 'text-amber-400' : 'text-neutral-500'
                                 }`}
                               >
                                 {loc.wait}
                               </p>
                             </div>
-                          </button>
+                          </motion.button>
                         );
                       })}
                     </div>
                   </motion.div>
 
-                  {/* PASO 2: SERVICIOS (Animado con framer-motion al cambiar sede) */}
+                  {/* PASO 2: SERVICIOS (Cascada con delay escalonado respecto al Paso 1) */}
                   <motion.div
                     key={`services-step-${selectedLocation}`}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.35 }}
+                    initial={{ opacity: 0, y: 35 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: '-50px' }}
+                    transition={{ duration: 0.7, delay: 0.25, ease: 'easeOut' }}
                     className="space-y-4"
                   >
                     <div className="flex items-center justify-between">
@@ -837,30 +872,36 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                      {SERVICES.map((srv) => {
+                      {SERVICES.map((srv, idx) => {
                         const isSelected = selectedService === srv.id;
                         return (
-                          <button
+                          <motion.button
                             key={srv.id}
                             type="button"
                             onClick={() => setSelectedService(srv.id)}
-                            className={`cursor-pointer text-left p-5 rounded-2xl border-2 transition-all duration-200 hover:-translate-y-1 flex flex-col justify-between gap-3 ${
+                            whileHover={{ y: -4, scale: 1.01 }}
+                            whileTap={{ scale: 0.98 }}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.5, delay: 0.1 + idx * 0.08 }}
+                            className={`cursor-pointer text-left p-5 rounded-2xl border-2 transition-all duration-300 flex flex-col justify-between gap-3 ${
                               isSelected
-                                ? 'border-neutral-900 bg-neutral-900 text-white shadow-lg ring-2 ring-amber-400/60'
-                                : 'border-neutral-200 bg-white text-neutral-800 shadow-sm hover:border-amber-400 hover:shadow-md'
+                                ? 'border-neutral-900 bg-neutral-900 text-white shadow-xl ring-2 ring-amber-400'
+                                : 'border-neutral-200 bg-white text-neutral-800 shadow-sm hover:border-amber-400 hover:shadow-lg'
                             }`}
                           >
                             <div className="space-y-1.5">
                               <div className="flex items-center justify-between gap-2">
                                 <span
-                                  className={`font-black text-base ${
+                                  className={`font-black text-base transition-colors ${
                                     isSelected ? 'text-white' : 'text-neutral-900'
                                   }`}
                                 >
                                   {srv.name}
                                 </span>
                                 <span
-                                  className={`text-sm font-black px-2.5 py-0.5 rounded-lg shrink-0 ${
+                                  className={`text-sm font-black px-2.5 py-0.5 rounded-lg shrink-0 transition-colors ${
                                     isSelected
                                       ? 'bg-amber-400 text-neutral-900'
                                       : 'bg-amber-50 text-amber-700 border border-amber-400/40'
@@ -870,7 +911,7 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
                                 </span>
                               </div>
                               <p
-                                className={`text-xs leading-relaxed ${
+                                className={`text-xs leading-relaxed transition-colors ${
                                   isSelected ? 'text-neutral-300' : 'text-neutral-500'
                                 }`}
                               >
@@ -879,7 +920,7 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
                             </div>
 
                             <div
-                              className={`text-[11px] font-bold pt-2.5 border-t flex items-center gap-1 ${
+                              className={`text-[11px] font-bold pt-2.5 border-t flex items-center gap-1 transition-colors ${
                                 isSelected
                                   ? 'border-white/15 text-amber-400'
                                   : 'border-neutral-100 text-amber-600'
@@ -888,18 +929,19 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
                               <Sparkles className="w-3.5 h-3.5 shrink-0" />
                               <span>{srv.duration} • Mascarilla gratis</span>
                             </div>
-                          </button>
+                          </motion.button>
                         );
                       })}
                     </div>
                   </motion.div>
 
-                  {/* PASO 3: BARBERO (Animado con framer-motion) */}
+                  {/* PASO 3: BARBERO (Fade-in suave que invita a completar el proceso) */}
                   <motion.div
                     key={`barber-step-${selectedLocation}-${selectedService}`}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.35 }}
+                    initial={{ opacity: 0, y: 35 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: '-50px' }}
+                    transition={{ duration: 0.75, delay: 0.15, ease: 'easeOut' }}
                     className="space-y-4"
                   >
                     <div className="flex items-center gap-3">
@@ -912,21 +954,27 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
                     </div>
 
                     <div className="grid grid-cols-3 gap-3.5">
-                      {BARBERS.map((barber) => {
+                      {BARBERS.map((barber, idx) => {
                         const isSelected = selectedBarber === barber.id;
                         return (
-                          <button
+                          <motion.button
                             key={barber.id}
                             type="button"
                             onClick={() => setSelectedBarber(barber.id)}
-                            className={`cursor-pointer p-4 sm:p-5 rounded-2xl border-2 text-center transition-all duration-200 hover:-translate-y-1 flex flex-col items-center ${
+                            whileHover={{ y: -4, scale: 1.02 }}
+                            whileTap={{ scale: 0.97 }}
+                            initial={{ opacity: 0, y: 15 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.45, delay: 0.1 + idx * 0.08 }}
+                            className={`cursor-pointer p-4 sm:p-5 rounded-2xl border-2 text-center transition-all duration-300 flex flex-col items-center ${
                               isSelected
-                                ? 'border-neutral-900 bg-neutral-900 text-white shadow-lg ring-2 ring-amber-400/60'
-                                : 'border-neutral-200 bg-white text-neutral-800 shadow-sm hover:border-amber-400 hover:shadow-md'
+                                ? 'border-neutral-900 bg-neutral-900 text-white shadow-xl ring-2 ring-amber-400'
+                                : 'border-neutral-200 bg-white text-neutral-800 shadow-sm hover:border-amber-400 hover:shadow-lg'
                             }`}
                           >
                             <span
-                              className={`text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full mb-3 ${
+                              className={`text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full mb-3 transition-colors ${
                                 isSelected
                                   ? 'bg-amber-400 text-neutral-900'
                                   : 'bg-amber-50 text-amber-700 border border-amber-400/30'
@@ -936,9 +984,9 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
                             </span>
 
                             <div
-                              className={`w-14 h-14 rounded-full flex items-center justify-center text-base font-black mb-2 ring-2 ${
+                              className={`w-14 h-14 rounded-full flex items-center justify-center text-base font-black mb-2 ring-2 transition-all ${
                                 isSelected
-                                  ? 'bg-amber-400 text-neutral-900 ring-amber-200'
+                                  ? 'bg-amber-400 text-neutral-900 ring-amber-200 scale-105 shadow-md'
                                   : 'bg-neutral-900 text-amber-400 ring-amber-400/40'
                               }`}
                             >
@@ -946,14 +994,14 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
                             </div>
 
                             <p
-                              className={`font-black text-sm sm:text-base ${
+                              className={`font-black text-sm sm:text-base transition-colors ${
                                 isSelected ? 'text-white' : 'text-neutral-900'
                               }`}
                             >
                               {barber.name}
                             </p>
                             <p
-                              className={`text-[11px] mt-0.5 line-clamp-1 ${
+                              className={`text-[11px] mt-0.5 line-clamp-1 transition-colors ${
                                 isSelected ? 'text-neutral-300' : 'text-neutral-500'
                               }`}
                             >
@@ -962,18 +1010,19 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
                             <span className="text-xs font-black text-amber-500 mt-1.5 flex items-center gap-0.5">
                               ★ {barber.rating}
                             </span>
-                          </button>
+                          </motion.button>
                         );
                       })}
                     </div>
                   </motion.div>
 
-                  {/* PASO 4: HORARIO + CONTACTO (Animado con framer-motion al seleccionar barbero) */}
+                  {/* PASO 4: HORARIO + CONTACTO (Fade-in suave) */}
                   <motion.div
                     key={`time-step-${selectedLocation}-${selectedBarber}`}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.35 }}
+                    initial={{ opacity: 0, y: 35 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: '-50px' }}
+                    transition={{ duration: 0.75, delay: 0.2, ease: 'easeOut' }}
                     className="space-y-4"
                   >
                     <div className="flex items-center justify-between">
@@ -991,26 +1040,32 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
                     </div>
 
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                      {TIME_SLOTS.map((slot) => {
+                      {TIME_SLOTS.map((slot, idx) => {
                         const isSelected = selectedTime === slot;
                         return (
-                          <button
+                          <motion.button
                             key={slot}
                             type="button"
                             onClick={() => setSelectedTime(slot)}
-                            className={`cursor-pointer py-3.5 px-3 rounded-xl border-2 font-black text-xs sm:text-sm transition-all duration-200 hover:-translate-y-0.5 flex items-center justify-center gap-1.5 ${
+                            whileHover={{ y: -3, scale: 1.02 }}
+                            whileTap={{ scale: 0.96 }}
+                            initial={{ opacity: 0, scale: 0.95 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.35, delay: idx * 0.04 }}
+                            className={`cursor-pointer py-3.5 px-3 rounded-xl border-2 font-black text-xs sm:text-sm transition-all duration-200 flex items-center justify-center gap-1.5 ${
                               isSelected
-                                ? 'border-neutral-900 bg-neutral-900 text-white shadow-md ring-2 ring-amber-400/60'
-                                : 'border-neutral-200 bg-white text-neutral-800 shadow-sm hover:border-amber-400'
+                                ? 'border-neutral-900 bg-neutral-900 text-white shadow-md ring-2 ring-amber-400'
+                                : 'border-neutral-200 bg-white text-neutral-800 shadow-sm hover:border-amber-400 hover:shadow-md'
                             }`}
                           >
                             <Clock
-                              className={`w-3.5 h-3.5 ${
+                              className={`w-3.5 h-3.5 transition-colors ${
                                 isSelected ? 'text-amber-400' : 'text-amber-500'
                               }`}
                             />
                             <span>{slot}</span>
-                          </button>
+                          </motion.button>
                         );
                       })}
                     </div>
@@ -1026,7 +1081,7 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
                           placeholder="Ej. Sebastián Rojas"
                           value={clientName}
                           onChange={(e) => setClientName(e.target.value)}
-                          className="w-full px-4 py-3.5 rounded-xl bg-neutral-50 border border-neutral-300 focus:bg-white focus:border-neutral-900 outline-none text-sm font-bold text-neutral-900 placeholder:text-neutral-400 transition-colors"
+                          className="w-full px-4 py-3.5 rounded-xl bg-neutral-50 border border-neutral-300 focus:bg-white focus:border-neutral-900 outline-none text-sm font-bold text-neutral-900 placeholder:text-neutral-400 transition-colors focus:ring-2 focus:ring-amber-400/40"
                         />
                       </div>
                       <div>
@@ -1038,15 +1093,21 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
                           placeholder="Ej. 943 123 456"
                           value={clientPhone}
                           onChange={(e) => setClientPhone(e.target.value)}
-                          className="w-full px-4 py-3.5 rounded-xl bg-neutral-50 border border-neutral-300 focus:bg-white focus:border-neutral-900 outline-none text-sm font-bold text-neutral-900 placeholder:text-neutral-400 transition-colors"
+                          className="w-full px-4 py-3.5 rounded-xl bg-neutral-50 border border-neutral-300 focus:bg-white focus:border-neutral-900 outline-none text-sm font-bold text-neutral-900 placeholder:text-neutral-400 transition-colors focus:ring-2 focus:ring-amber-400/40"
                         />
                       </div>
                     </div>
                   </motion.div>
 
-                  {/* Resumen Pre-Confirmación y Botón Principal */}
-                  <div className="pt-2 space-y-4">
-                    <div className="bg-neutral-50 border border-neutral-200 rounded-2xl p-5 flex flex-wrap items-center justify-between gap-3">
+                  {/* Resumen Pre-Confirmación y Botón Principal (Slide Up Suave al scrollear al final) */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 35 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: '-40px' }}
+                    transition={{ duration: 0.8, delay: 0.15, ease: 'easeOut' }}
+                    className="pt-2 space-y-4"
+                  >
+                    <div className="bg-neutral-50 border border-neutral-200 rounded-2xl p-5 flex flex-wrap items-center justify-between gap-3 shadow-sm hover:border-amber-400/50 transition-colors">
                       <div className="text-xs sm:text-sm space-y-1">
                         <p className="font-black text-base text-neutral-900">
                           {currentSrvObj.name} con {currentBrbObj.name} ({currentBrbObj.badge})
@@ -1068,10 +1129,10 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
 
                     <motion.button
                       type="submit"
-                      whileHover={{ scale: 1.01 }}
-                      whileTap={{ scale: 0.99 }}
+                      whileHover={{ scale: 1.015, y: -2 }}
+                      whileTap={{ scale: 0.985 }}
                       disabled={isSendingWebhook}
-                      className="cursor-pointer w-full py-5 px-6 rounded-2xl bg-neutral-900 hover:bg-neutral-800 text-white font-black text-base sm:text-xl uppercase tracking-tight shadow-xl transition-all duration-300 flex items-center justify-center gap-3 disabled:opacity-70"
+                      className="cursor-pointer w-full py-5 px-6 rounded-2xl bg-neutral-900 hover:bg-neutral-800 text-white font-black text-base sm:text-xl uppercase tracking-tight shadow-[0_20px_50px_rgba(0,0,0,0.25)] border border-neutral-700 hover:border-amber-400/60 transition-all duration-300 flex items-center justify-center gap-3 disabled:opacity-70 group"
                     >
                       {isSendingWebhook ? (
                         <>
@@ -1080,13 +1141,13 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
                         </>
                       ) : (
                         <>
-                          <MessageCircle className="w-6 h-6 text-amber-400 stroke-[2.5]" />
+                          <MessageCircle className="w-6 h-6 text-amber-400 stroke-[2.5] group-hover:scale-110 transition-transform" />
                           <span>Confirmar Reserva Instantánea</span>
-                          <ChevronRight className="w-6 h-6 text-amber-400 stroke-[2.75]" />
+                          <ChevronRight className="w-6 h-6 text-amber-400 stroke-[2.75] group-hover:translate-x-1 transition-transform" />
                         </>
                       )}
                     </motion.button>
-                  </div>
+                  </motion.div>
                 </motion.form>
               )}
             </AnimatePresence>
