@@ -357,7 +357,7 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
       title: 'Mascarilla y masajes incluidos',
       sub: 'Ventaja Competitiva King’s',
       icon: Sparkles,
-      positionClass: 'top-0 left-1 sm:top-2 sm:-left-4 md:-left-8 lg:-left-12',
+      positionClass: 'top-[35%] -left-4 md:top-[40%] md:-left-12',
       alignClass: 'text-left',
       duration: 3.6,
       delay: 0
@@ -367,7 +367,7 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
       title: 'Desde S/ 15',
       sub: 'Rituales & Cortes Premium',
       icon: Star,
-      positionClass: 'top-1/4 right-1 sm:top-1/4 sm:-right-4 md:-right-8 lg:-right-12',
+      positionClass: 'top-[55%] -right-4 md:top-[50%] md:-right-8',
       alignClass: 'text-right',
       duration: 4.1,
       delay: 0.7
@@ -377,7 +377,7 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
       title: 'Bioseguridad Garantizada',
       sub: 'Esterilización UV & Navaja Nueva',
       icon: ShieldCheck,
-      positionClass: 'bottom-2 left-1 sm:bottom-3 sm:-left-2 md:-left-6 lg:-left-10',
+      positionClass: 'bottom-[15%] left-0 md:bottom-[20%] md:-left-4',
       alignClass: 'text-left',
       duration: 4.5,
       delay: 1.3
@@ -434,8 +434,8 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
           />
 
           {/* Marca de agua gigante en el fondo y texto vertical editorial */}
-          <div className="pointer-events-none select-none absolute inset-x-0 top-4 flex justify-center overflow-hidden opacity-[0.03]">
-            <span className="font-black text-[6rem] sm:text-[10rem] tracking-tight whitespace-nowrap leading-none">
+          <div className="pointer-events-none select-none absolute inset-x-0 top-2 sm:top-4 flex justify-center overflow-hidden opacity-[0.035]">
+            <span className="font-black text-8xl sm:text-9xl md:text-[10rem] lg:text-[12rem] tracking-tight md:tracking-tighter whitespace-nowrap leading-none">
               KING&apos;S STUDIO
             </span>
           </div>
@@ -511,7 +511,7 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
                           ease: 'easeInOut',
                           delay: pill.delay
                         }}
-                        className={`absolute z-20 ${pill.positionClass} ${pill.alignClass} pointer-events-none select-none max-w-[130px] sm:max-w-[170px] md:max-w-none`}
+                        className={`absolute z-20 ${pill.positionClass} ${pill.alignClass} pointer-events-none select-none w-max min-w-[140px]`}
                       >
                         <div
                           className={`flex items-center gap-1 sm:gap-1.5 ${
@@ -519,16 +519,16 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
                           }`}
                         >
                           {!isRight && (
-                            <PillIcon className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-amber-400 shrink-0 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]" />
+                            <PillIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-400 shrink-0 drop-shadow-[0_2px_6px_rgba(0,0,0,1)]" />
                           )}
-                          <span className="font-black uppercase tracking-widest text-[10px] sm:text-xs md:text-sm text-amber-400 leading-tight drop-shadow-[0_4px_4px_rgba(0,0,0,0.8)]">
+                          <span className="font-black uppercase tracking-tight leading-none text-xs sm:text-sm md:text-base text-amber-400 [text-shadow:_0_4px_12px_rgba(0,0,0,1)]">
                             {pill.title}
                           </span>
                           {isRight && (
-                            <PillIcon className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-amber-400 shrink-0 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]" />
+                            <PillIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-400 shrink-0 drop-shadow-[0_2px_6px_rgba(0,0,0,1)]" />
                           )}
                         </div>
-                        <p className="font-bold tracking-widest uppercase text-[8px] sm:text-[9px] md:text-[10px] text-white/80 drop-shadow-[0_4px_4px_rgba(0,0,0,0.8)] mt-0.5 leading-tight">
+                        <p className="font-bold uppercase tracking-tight text-[9px] sm:text-[10px] md:text-xs text-white/80 [text-shadow:_0_3px_8px_rgba(0,0,0,1)] mt-1 leading-none">
                           {pill.sub}
                         </p>
                       </motion.div>
