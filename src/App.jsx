@@ -350,39 +350,6 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
     setClientPhone('');
   };
 
-  // 3 Etiquetas Flotantes alrededor de la Silla Fotográfica (Tipografía Pura sin Caja)
-  const floatingPills = [
-    {
-      id: 'pill-mascarilla',
-      title: 'Mascarilla y masajes incluidos',
-      sub: 'Ventaja Competitiva King’s',
-      icon: Sparkles,
-      positionClass: 'top-[35%] -left-4 md:top-[40%] md:-left-12',
-      alignClass: 'text-left',
-      duration: 3.6,
-      delay: 0
-    },
-    {
-      id: 'pill-desde',
-      title: 'Desde S/ 15',
-      sub: 'Rituales & Cortes Premium',
-      icon: Star,
-      positionClass: 'top-[55%] -right-4 md:top-[50%] md:-right-8',
-      alignClass: 'text-right',
-      duration: 4.1,
-      delay: 0.7
-    },
-    {
-      id: 'pill-bioseguridad',
-      title: 'Bioseguridad Garantizada',
-      sub: 'Esterilización UV & Navaja Nueva',
-      icon: ShieldCheck,
-      positionClass: 'bottom-[15%] left-0 md:bottom-[20%] md:-left-4',
-      alignClass: 'text-left',
-      duration: 4.5,
-      delay: 1.3
-    }
-  ];
 
   const marqueeItems = Array.from({ length: 8 }, () =>
     "KING'S BARBER SHOP • CORTES PREMIUM • FADE • BARBA • "
@@ -423,7 +390,7 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
         {/* ====================================================================
             1. NUEVO HERO SECTION (Fotográfico, Compacto e Inmersivo en Gris Carbón)
         ==================================================================== */}
-        <section className="relative bg-neutral-900 text-white py-6 sm:py-8 min-h-[calc(100vh-5rem)] flex flex-col justify-center overflow-hidden">
+        <section className="relative bg-neutral-900 text-white w-full min-h-[85vh] flex flex-col justify-center items-center pt-24 pb-8 overflow-hidden">
           {/* Luz suave de estudio fotográfico (Key Light & Rim Light) */}
           <div
             className="pointer-events-none absolute inset-0"
@@ -433,11 +400,9 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
             }}
           />
 
-          {/* Marca de agua gigante en el fondo y texto vertical editorial */}
-          <div className="pointer-events-none select-none absolute inset-x-0 top-2 sm:top-4 flex justify-center overflow-hidden opacity-[0.05] sm:opacity-[0.035]">
-            <span className="font-black text-8xl sm:text-9xl md:text-[10rem] lg:text-[12rem] tracking-tight md:tracking-tighter whitespace-nowrap leading-none">
-              KING&apos;S STUDIO
-            </span>
+          {/* Texto gigante de fondo ("KING'S STUDIO") */}
+          <div className="text-[5rem] md:text-[10rem] font-black tracking-tight whitespace-nowrap overflow-hidden absolute inset-0 flex items-center justify-center opacity-[0.03] pointer-events-none select-none">
+            KING&apos;S STUDIO
           </div>
 
           <div className="hidden xl:flex pointer-events-none select-none absolute left-7 top-1/2 -translate-y-1/2 flex-col items-center gap-4 opacity-30">
@@ -451,89 +416,95 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
             <div className="w-px h-16 bg-amber-400" />
           </div>
 
-          <div className="relative max-w-5xl mx-auto px-4 sm:px-6 flex flex-col items-center justify-center my-auto w-full">
+          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 flex flex-col items-center justify-center my-auto w-full">
             {/* Etiqueta Superior de Estudio */}
             <motion.div
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="z-20 inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/5 border border-white/15 backdrop-blur-md text-amber-400 text-[11px] sm:text-xs font-extrabold uppercase tracking-widest mb-2 sm:mb-3"
+              className="z-20 inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/5 border border-white/15 backdrop-blur-md text-amber-400 text-[11px] sm:text-xs font-extrabold uppercase tracking-widest mb-1.5 sm:mb-2"
             >
               <Award className="w-3.5 h-3.5 text-amber-400" />
               <span>KING&apos;S BARBER SHOP • NUEVO CHIMBOTE &amp; CENTRO</span>
             </motion.div>
 
             {/* COMPOSICIÓN CON SUPERPOSICIÓN DE CAPAS (Z-INDEX):
-                Capa 1 (z-0): Título gigante "EL ESTILO QUE MANDA" (Escala controlada y legible en móvil)
-                Capa 2 (z-10): Imagen Real Silla y Barbero (/silla.png) (sin solaparse en móvil)
-                Capa 3 (z-20): 3 Textos flotantes tipográficos puros (sin tarjeta/caja) */}
-            <div className="relative w-full flex flex-col items-center pt-1 sm:pt-2">
+                Capa 1 (z-0): Título gigante "EL ESTILO QUE MANDA"
+                Capa 2 (z-10): Imagen Real Silla y Barbero (/silla.png) (Massive Container)
+                Capa 3 (z-20): 3 Textos flotantes orbitando hacia los costados */}
+            <div className="relative w-full flex flex-col items-center pt-0">
               {/* CAPA 1: TÍTULO GIGANTE DETRÁS DE LA SILLA */}
               <motion.h1
-                initial={{ opacity: 0, y: 25, scale: 0.96 }}
+                initial={{ opacity: 0, y: 20, scale: 0.96 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
-                className="relative z-0 text-center font-black tracking-tight uppercase text-3xl sm:text-5xl md:text-7xl lg:text-8xl leading-[0.92] text-white select-none max-w-4xl"
+                className="relative z-0 text-center font-black tracking-tight uppercase text-5xl md:text-7xl lg:text-8xl leading-none md:leading-[0.85] text-white select-none max-w-4xl"
               >
                 EL ESTILO{' '}
                 <span className="block text-amber-400 sm:inline">QUE MANDA</span>
               </motion.h1>
 
-              {/* CAPA 2 & 3: CONTENEDOR DE LA SILLA CON TEXTOS FLOTANTES TIPOGRÁFICOS */}
-              <div className="relative z-10 mt-1 sm:-mt-8 md:-mt-12 flex items-center justify-center w-full">
-                {/* Sombra de piso de estudio y resplandor dorado sutil */}
-                <div className="pointer-events-none absolute -bottom-4 left-1/2 -translate-x-1/2 w-56 sm:w-80 md:w-[26rem] lg:w-[32rem] h-8 sm:h-10 bg-black/85 rounded-full blur-2xl z-0" />
-                <div className="pointer-events-none absolute -bottom-2 left-1/2 -translate-x-1/2 w-48 sm:w-72 md:w-80 h-6 sm:h-8 bg-amber-500/15 rounded-full blur-xl z-0" />
+              {/* CONTENEDOR MASSIVE (SEPARADO DEL H1 Y EXPANDIDO HACIA LOS COSTADOS) */}
+              <div className="relative w-full max-w-[95%] md:max-w-3xl lg:max-w-5xl mx-auto mt-8 md:mt-16 flex justify-center">
+                {/* Sombra de piso de estudio y resplandor sutil */}
+                <div className="pointer-events-none absolute -bottom-6 left-1/2 -translate-x-1/2 w-64 sm:w-96 md:w-[32rem] lg:w-[38rem] h-8 sm:h-10 bg-black/85 rounded-full blur-2xl z-0" />
+                <div className="pointer-events-none absolute -bottom-3 left-1/2 -translate-x-1/2 w-56 sm:w-80 md:w-[26rem] lg:w-[32rem] h-6 sm:h-8 bg-amber-500/15 rounded-full blur-xl z-0" />
 
+                <img
+                  src="/silla.png"
+                  alt="King's Barber"
+                  className="w-full h-auto max-h-[55vh] md:max-h-[65vh] object-contain z-10 drop-shadow-[0_20px_50px_rgba(251,191,36,0.15)] pointer-events-none"
+                />
+
+                {/* Etiqueta 1: Mascarilla (Separada hacia la izquierda) */}
                 <motion.div
-                  initial={{ opacity: 0, scale: 0.9, y: 30 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  transition={{ duration: 0.9, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
-                  className="relative flex items-center justify-center max-w-full"
+                  animate={{ y: [0, -6, 0] }}
+                  transition={{ duration: 3.6, repeat: Infinity, ease: 'easeInOut' }}
+                  className="absolute top-[10%] left-0 md:top-[15%] md:-left-16 lg:-left-32 z-20 w-[130px] md:w-[200px] text-left pointer-events-none select-none"
                 >
-                  <img
-                    src="/silla.png"
-                    alt="Silla y Barbero King's Barber Shop"
-                    className="w-[17rem] sm:w-[24rem] md:w-[30rem] lg:w-[36rem] max-h-[40vh] sm:max-h-[48vh] h-auto object-contain drop-shadow-[0_20px_40px_rgba(251,191,36,0.18)] z-10 select-none pointer-events-none"
-                  />
+                  <div className="flex items-center gap-1 sm:gap-1.5">
+                    <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-amber-400 shrink-0 drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]" />
+                    <span className="text-[10px] md:text-xs font-black uppercase tracking-widest text-amber-400 drop-shadow-[0_3px_3px_rgba(0,0,0,0.9)] leading-tight">
+                      Mascarilla y masajes incluidos
+                    </span>
+                  </div>
+                  <p className="text-[8px] md:text-[10px] text-white/80 font-bold uppercase tracking-widest drop-shadow-[0_2px_2px_rgba(0,0,0,0.9)] mt-0.5 leading-tight">
+                    Ventaja Competitiva King’s
+                  </p>
+                </motion.div>
 
-                  {/* CAPA 3 (z-20): 3 TEXTOS FLOTANTES TIPOGRÁFICOS PUROS (SIN CAJA NI BORDES) */}
-                  {floatingPills.map((pill) => {
-                    const PillIcon = pill.icon;
-                    const isRight = pill.alignClass === 'text-right';
-                    return (
-                      <motion.div
-                        key={pill.id}
-                        animate={{ y: [0, -7, 0] }}
-                        transition={{
-                          duration: pill.duration,
-                          repeat: Infinity,
-                          ease: 'easeInOut',
-                          delay: pill.delay
-                        }}
-                        className={`absolute z-20 ${pill.positionClass} ${pill.alignClass} pointer-events-none select-none w-max min-w-[140px]`}
-                      >
-                        <div
-                          className={`flex items-center gap-1 sm:gap-1.5 ${
-                            isRight ? 'justify-end' : 'justify-start'
-                          }`}
-                        >
-                          {!isRight && (
-                            <PillIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-400 shrink-0 drop-shadow-[0_2px_6px_rgba(0,0,0,1)]" />
-                          )}
-                          <span className="font-black uppercase tracking-tight leading-none text-xs sm:text-sm md:text-base text-amber-400 [text-shadow:_0_4px_12px_rgba(0,0,0,1)]">
-                            {pill.title}
-                          </span>
-                          {isRight && (
-                            <PillIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-400 shrink-0 drop-shadow-[0_2px_6px_rgba(0,0,0,1)]" />
-                          )}
-                        </div>
-                        <p className="font-bold uppercase tracking-tight text-[9px] sm:text-[10px] md:text-xs text-white/80 [text-shadow:_0_3px_8px_rgba(0,0,0,1)] mt-1 leading-none">
-                          {pill.sub}
-                        </p>
-                      </motion.div>
-                    );
-                  })}
+                {/* Etiqueta 2: Precio (S/ 15) (Separada hacia la derecha) */}
+                <motion.div
+                  animate={{ y: [0, -6, 0] }}
+                  transition={{ duration: 4.1, repeat: Infinity, ease: 'easeInOut', delay: 0.7 }}
+                  className="absolute top-[45%] right-0 md:top-[40%] md:-right-16 lg:-right-32 -translate-y-1/2 z-20 w-[110px] md:w-[180px] text-right pointer-events-none select-none"
+                >
+                  <div className="flex items-center justify-end gap-1 sm:gap-1.5">
+                    <span className="text-[10px] md:text-xs font-black uppercase tracking-widest text-amber-400 drop-shadow-[0_3px_3px_rgba(0,0,0,0.9)] leading-tight">
+                      Desde S/ 15
+                    </span>
+                    <Star className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-amber-400 shrink-0 drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]" />
+                  </div>
+                  <p className="text-[8px] md:text-[10px] text-white/80 font-bold uppercase tracking-widest drop-shadow-[0_2px_2px_rgba(0,0,0,0.9)] mt-0.5 leading-tight">
+                    Rituales &amp; Cortes Premium
+                  </p>
+                </motion.div>
+
+                {/* Etiqueta 3: Bioseguridad (Base hacia la izquierda) */}
+                <motion.div
+                  animate={{ y: [0, -6, 0] }}
+                  transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut', delay: 1.3 }}
+                  className="absolute bottom-0 left-0 md:bottom-[5%] md:-left-16 lg:-left-32 z-20 w-[130px] md:w-[200px] text-left pointer-events-none select-none"
+                >
+                  <div className="flex items-center gap-1 sm:gap-1.5">
+                    <ShieldCheck className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-amber-400 shrink-0 drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]" />
+                    <span className="text-[10px] md:text-xs font-black uppercase tracking-widest text-amber-400 drop-shadow-[0_3px_3px_rgba(0,0,0,0.9)] leading-tight">
+                      Bioseguridad Garantizada
+                    </span>
+                  </div>
+                  <p className="text-[8px] md:text-[10px] text-white/80 font-bold uppercase tracking-widest drop-shadow-[0_2px_2px_rgba(0,0,0,0.9)] mt-0.5 leading-tight">
+                    Esterilización UV &amp; Navaja Nueva
+                  </p>
                 </motion.div>
               </div>
 
@@ -542,7 +513,7 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3, ease: 'easeOut' }}
-                className="mt-3 sm:mt-5 text-sm sm:text-base text-neutral-300 max-w-lg text-center font-medium leading-relaxed px-4"
+                className="mt-2 sm:mt-3 text-xs sm:text-sm md:text-base text-neutral-300 max-w-lg text-center font-medium leading-relaxed px-4"
               >
                 Elige tu sede en Nuevo Chimbote o Chimbote Centro y separa tu silla al instante sin hacer colas.
               </motion.p>
@@ -555,7 +526,7 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
                 transition={{ duration: 0.6, delay: 0.4, ease: 'easeOut' }}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.97 }}
-                className="mt-4 sm:mt-5 cursor-pointer group px-8 sm:px-10 py-3.5 sm:py-4 rounded-2xl bg-amber-400 hover:bg-amber-300 text-neutral-900 font-black text-sm sm:text-base uppercase tracking-tight shadow-[0_15px_35px_rgba(251,191,36,0.28)] transition-all flex items-center gap-2.5"
+                className="mt-3 sm:mt-4 cursor-pointer group px-8 sm:px-10 py-3 sm:py-3.5 rounded-2xl bg-amber-400 hover:bg-amber-300 text-neutral-900 font-black text-xs sm:text-sm md:text-base uppercase tracking-tight shadow-[0_15px_35px_rgba(251,191,36,0.28)] transition-all flex items-center gap-2.5"
               >
                 <span>Separar Silla Ahora</span>
                 <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-neutral-900 text-amber-400 flex items-center justify-center group-hover:translate-x-1 transition-transform">
