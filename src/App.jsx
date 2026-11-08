@@ -350,14 +350,15 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
     setClientPhone('');
   };
 
-  // 3 Etiquetas Flotantes alrededor de la Silla Fotográfica Compacta
+  // 3 Etiquetas Flotantes alrededor de la Silla Fotográfica (Tipografía Pura sin Caja)
   const floatingPills = [
     {
       id: 'pill-mascarilla',
       title: 'Mascarilla y masajes incluidos',
       sub: 'Ventaja Competitiva King’s',
       icon: Sparkles,
-      positionClass: 'top-2 left-0 sm:top-4 sm:-left-6 md:-left-10 lg:-left-14',
+      positionClass: 'top-0 left-1 sm:top-2 sm:-left-4 md:-left-8 lg:-left-12',
+      alignClass: 'text-left',
       duration: 3.6,
       delay: 0
     },
@@ -366,7 +367,8 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
       title: 'Desde S/ 15',
       sub: 'Rituales & Cortes Premium',
       icon: Star,
-      positionClass: 'top-1/4 right-0 sm:top-1/4 sm:-right-6 md:-right-10 lg:-right-14',
+      positionClass: 'top-1/4 right-1 sm:top-1/4 sm:-right-4 md:-right-8 lg:-right-12',
+      alignClass: 'text-right',
       duration: 4.1,
       delay: 0.7
     },
@@ -375,7 +377,8 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
       title: 'Bioseguridad Garantizada',
       sub: 'Esterilización UV & Navaja Nueva',
       icon: ShieldCheck,
-      positionClass: 'bottom-3 left-0 sm:bottom-4 sm:-left-4 md:-left-8 lg:-left-12',
+      positionClass: 'bottom-2 left-1 sm:bottom-3 sm:-left-2 md:-left-6 lg:-left-10',
+      alignClass: 'text-left',
       duration: 4.5,
       delay: 1.3
     }
@@ -461,26 +464,26 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
             </motion.div>
 
             {/* COMPOSICIÓN CON SUPERPOSICIÓN DE CAPAS (Z-INDEX):
-                Capa 1 (z-0): Título gigante "EL ESTILO QUE MANDA" (Escala controlada)
-                Capa 2 (z-10): Imagen Real Silla y Barbero (/silla.png) (max-h controlada)
-                Capa 3 (z-20): 3 Etiquetas flotantes compactas orbitando con framer-motion */}
+                Capa 1 (z-0): Título gigante "EL ESTILO QUE MANDA" (Escala controlada y legible en móvil)
+                Capa 2 (z-10): Imagen Real Silla y Barbero (/silla.png) (sin solaparse en móvil)
+                Capa 3 (z-20): 3 Textos flotantes tipográficos puros (sin tarjeta/caja) */}
             <div className="relative w-full flex flex-col items-center pt-1 sm:pt-2">
-              {/* CAPA 1: TÍTULO GIGANTE DETRÁS DE LA SILLA (Reducido y proporcional) */}
+              {/* CAPA 1: TÍTULO GIGANTE DETRÁS DE LA SILLA */}
               <motion.h1
                 initial={{ opacity: 0, y: 25, scale: 0.96 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
-                className="relative z-0 text-center font-black tracking-tight uppercase text-4xl sm:text-6xl md:text-7xl lg:text-8xl leading-[0.9] text-white select-none max-w-4xl"
+                className="relative z-0 text-center font-black tracking-tight uppercase text-3xl sm:text-5xl md:text-7xl lg:text-8xl leading-[0.92] text-white select-none max-w-4xl"
               >
                 EL ESTILO{' '}
                 <span className="block text-amber-400 sm:inline">QUE MANDA</span>
               </motion.h1>
 
-              {/* CAPA 2 & 3: CONTENEDOR DE LA SILLA CON ETIQUETAS FLOTANTES */}
-              <div className="relative z-10 -mt-6 sm:-mt-10 md:-mt-12 flex items-center justify-center w-full">
+              {/* CAPA 2 & 3: CONTENEDOR DE LA SILLA CON TEXTOS FLOTANTES TIPOGRÁFICOS */}
+              <div className="relative z-10 mt-1 sm:-mt-8 md:-mt-12 flex items-center justify-center w-full">
                 {/* Sombra de piso de estudio y resplandor dorado sutil */}
-                <div className="pointer-events-none absolute -bottom-5 left-1/2 -translate-x-1/2 w-64 sm:w-80 md:w-[26rem] lg:w-[32rem] h-10 bg-black/85 rounded-full blur-2xl z-0" />
-                <div className="pointer-events-none absolute -bottom-3 left-1/2 -translate-x-1/2 w-56 sm:w-72 md:w-80 h-8 bg-amber-500/15 rounded-full blur-xl z-0" />
+                <div className="pointer-events-none absolute -bottom-4 left-1/2 -translate-x-1/2 w-56 sm:w-80 md:w-[26rem] lg:w-[32rem] h-8 sm:h-10 bg-black/85 rounded-full blur-2xl z-0" />
+                <div className="pointer-events-none absolute -bottom-2 left-1/2 -translate-x-1/2 w-48 sm:w-72 md:w-80 h-6 sm:h-8 bg-amber-500/15 rounded-full blur-xl z-0" />
 
                 <motion.div
                   initial={{ opacity: 0, scale: 0.9, y: 30 }}
@@ -491,35 +494,43 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
                   <img
                     src="/silla.png"
                     alt="Silla y Barbero King's Barber Shop"
-                    className="w-[20rem] sm:w-[26rem] md:w-[32rem] lg:w-[38rem] max-h-[46vh] sm:max-h-[50vh] h-auto object-contain drop-shadow-[0_25px_50px_rgba(251,191,36,0.18)] z-10 select-none pointer-events-none"
+                    className="w-[17rem] sm:w-[24rem] md:w-[30rem] lg:w-[36rem] max-h-[40vh] sm:max-h-[48vh] h-auto object-contain drop-shadow-[0_20px_40px_rgba(251,191,36,0.18)] z-10 select-none pointer-events-none"
                   />
 
-                  {/* CAPA 3 (z-20): 3 ETIQUETAS FLOTANTES COMPACTAS CON FRAMER-MOTION */}
+                  {/* CAPA 3 (z-20): 3 TEXTOS FLOTANTES TIPOGRÁFICOS PUROS (SIN CAJA NI BORDES) */}
                   {floatingPills.map((pill) => {
                     const PillIcon = pill.icon;
+                    const isRight = pill.alignClass === 'text-right';
                     return (
                       <motion.div
                         key={pill.id}
-                        animate={{ y: [0, -10, 0] }}
+                        animate={{ y: [0, -7, 0] }}
                         transition={{
                           duration: pill.duration,
                           repeat: Infinity,
                           ease: 'easeInOut',
                           delay: pill.delay
                         }}
-                        className={`absolute z-20 ${pill.positionClass} flex items-center gap-2 sm:gap-2.5 px-3 py-1.5 sm:px-3.5 sm:py-2.5 rounded-xl sm:rounded-2xl bg-neutral-900/95 backdrop-blur-md border border-amber-400/70 shadow-[0_12px_30px_rgba(0,0,0,0.65)] text-left`}
+                        className={`absolute z-20 ${pill.positionClass} ${pill.alignClass} pointer-events-none select-none max-w-[130px] sm:max-w-[170px] md:max-w-none`}
                       >
-                        <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg sm:rounded-xl bg-amber-400 text-neutral-900 flex items-center justify-center shrink-0">
-                          <PillIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4 stroke-[2.5]" />
-                        </div>
-                        <div className="pr-0.5 sm:pr-1">
-                          <span className="block text-[11px] sm:text-xs md:text-sm font-black text-white leading-tight whitespace-nowrap">
+                        <div
+                          className={`flex items-center gap-1 sm:gap-1.5 ${
+                            isRight ? 'justify-end' : 'justify-start'
+                          }`}
+                        >
+                          {!isRight && (
+                            <PillIcon className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-amber-400 shrink-0 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]" />
+                          )}
+                          <span className="font-black uppercase tracking-widest text-[10px] sm:text-xs md:text-sm text-amber-400 leading-tight drop-shadow-[0_4px_4px_rgba(0,0,0,0.8)]">
                             {pill.title}
                           </span>
-                          <span className="block text-[9px] sm:text-[10px] font-bold text-amber-400 uppercase tracking-wider mt-0.5 whitespace-nowrap">
-                            {pill.sub}
-                          </span>
+                          {isRight && (
+                            <PillIcon className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-amber-400 shrink-0 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]" />
+                          )}
                         </div>
+                        <p className="font-bold tracking-widest uppercase text-[8px] sm:text-[9px] md:text-[10px] text-white/80 drop-shadow-[0_4px_4px_rgba(0,0,0,0.8)] mt-0.5 leading-tight">
+                          {pill.sub}
+                        </p>
                       </motion.div>
                     );
                   })}
