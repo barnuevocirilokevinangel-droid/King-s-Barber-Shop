@@ -350,14 +350,14 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
     setClientPhone('');
   };
 
-  // 3 Etiquetas Flotantes alrededor de la Silla Fotográfica Masiva
+  // 3 Etiquetas Flotantes alrededor de la Silla Fotográfica Compacta
   const floatingPills = [
     {
       id: 'pill-mascarilla',
       title: 'Mascarilla y masajes incluidos',
       sub: 'Ventaja Competitiva King’s',
       icon: Sparkles,
-      positionClass: 'top-6 left-2 sm:top-12 sm:left-4 md:left-8 lg:left-12',
+      positionClass: 'top-2 left-0 sm:top-4 sm:-left-6 md:-left-10 lg:-left-14',
       duration: 3.6,
       delay: 0
     },
@@ -366,7 +366,7 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
       title: 'Desde S/ 15',
       sub: 'Rituales & Cortes Premium',
       icon: Star,
-      positionClass: 'top-1/3 right-2 sm:top-1/3 sm:right-4 md:right-8 lg:right-12',
+      positionClass: 'top-1/4 right-0 sm:top-1/4 sm:-right-6 md:-right-10 lg:-right-14',
       duration: 4.1,
       delay: 0.7
     },
@@ -375,7 +375,7 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
       title: 'Bioseguridad Garantizada',
       sub: 'Esterilización UV & Navaja Nueva',
       icon: ShieldCheck,
-      positionClass: 'bottom-8 left-2 sm:bottom-14 sm:left-6 md:left-10 lg:left-16',
+      positionClass: 'bottom-3 left-0 sm:bottom-4 sm:-left-4 md:-left-8 lg:-left-12',
       duration: 4.5,
       delay: 1.3
     }
@@ -418,9 +418,9 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
 
       <main className="flex-1">
         {/* ====================================================================
-            1. NUEVO HERO SECTION (Fotográfico e Inmersivo en Gris Carbón)
+            1. NUEVO HERO SECTION (Fotográfico, Compacto e Inmersivo en Gris Carbón)
         ==================================================================== */}
-        <section className="relative bg-neutral-900 text-white pt-10 pb-20 sm:pt-16 sm:pb-28 overflow-hidden">
+        <section className="relative bg-neutral-900 text-white py-6 sm:py-8 min-h-[calc(100vh-5rem)] flex flex-col justify-center overflow-hidden">
           {/* Luz suave de estudio fotográfico (Key Light & Rim Light) */}
           <div
             className="pointer-events-none absolute inset-0"
@@ -431,8 +431,8 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
           />
 
           {/* Marca de agua gigante en el fondo y texto vertical editorial */}
-          <div className="pointer-events-none select-none absolute inset-x-0 top-6 flex justify-center overflow-hidden opacity-[0.03]">
-            <span className="font-black text-[9rem] sm:text-[14rem] tracking-tight whitespace-nowrap leading-none">
+          <div className="pointer-events-none select-none absolute inset-x-0 top-4 flex justify-center overflow-hidden opacity-[0.03]">
+            <span className="font-black text-[6rem] sm:text-[10rem] tracking-tight whitespace-nowrap leading-none">
               KING&apos;S STUDIO
             </span>
           </div>
@@ -448,75 +448,75 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
             <div className="w-px h-16 bg-amber-400" />
           </div>
 
-          <div className="relative max-w-6xl mx-auto px-5 sm:px-8 flex flex-col items-center">
+          <div className="relative max-w-5xl mx-auto px-4 sm:px-6 flex flex-col items-center justify-center my-auto w-full">
             {/* Etiqueta Superior de Estudio */}
             <motion.div
-              initial={{ opacity: 0, y: 14 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="z-20 inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/15 backdrop-blur-md text-amber-400 text-xs font-extrabold uppercase tracking-widest mb-4"
+              className="z-20 inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/5 border border-white/15 backdrop-blur-md text-amber-400 text-[11px] sm:text-xs font-extrabold uppercase tracking-widest mb-2 sm:mb-3"
             >
               <Award className="w-3.5 h-3.5 text-amber-400" />
               <span>KING&apos;S BARBER SHOP • NUEVO CHIMBOTE &amp; CENTRO</span>
             </motion.div>
 
             {/* COMPOSICIÓN CON SUPERPOSICIÓN DE CAPAS (Z-INDEX):
-                Capa 1 (z-0): Título gigante "EL ESTILO QUE MANDA"
-                Capa 2 (z-10): Imagen Real Masiva Silla y Barbero (/silla.png)
-                Capa 3 (z-20): 3 Etiquetas flotantes orbitando con framer-motion */}
-            <div className="relative w-full flex flex-col items-center pt-2 sm:pt-4">
-              {/* CAPA 1: TÍTULO GIGANTE DETRÁS DE LA SILLA (Entrada coordinada) */}
+                Capa 1 (z-0): Título gigante "EL ESTILO QUE MANDA" (Escala controlada)
+                Capa 2 (z-10): Imagen Real Silla y Barbero (/silla.png) (max-h controlada)
+                Capa 3 (z-20): 3 Etiquetas flotantes compactas orbitando con framer-motion */}
+            <div className="relative w-full flex flex-col items-center pt-1 sm:pt-2">
+              {/* CAPA 1: TÍTULO GIGANTE DETRÁS DE LA SILLA (Reducido y proporcional) */}
               <motion.h1
-                initial={{ opacity: 0, y: 30, scale: 0.96 }}
+                initial={{ opacity: 0, y: 25, scale: 0.96 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
-                className="relative z-0 text-center font-black tracking-tight uppercase text-5xl sm:text-7xl md:text-8xl lg:text-[7.2rem] leading-[0.88] text-white select-none max-w-6xl"
+                className="relative z-0 text-center font-black tracking-tight uppercase text-4xl sm:text-6xl md:text-7xl lg:text-8xl leading-[0.9] text-white select-none max-w-4xl"
               >
                 EL ESTILO{' '}
                 <span className="block text-amber-400 sm:inline">QUE MANDA</span>
               </motion.h1>
 
-              {/* CAPA 2 & 3: CONTENEDOR DE LA SILLA GIGANTE CON ETIQUETAS FLOTANTES */}
-              <div className="relative z-10 -mt-8 sm:-mt-14 md:-mt-20 lg:-mt-24 flex items-center justify-center w-full">
+              {/* CAPA 2 & 3: CONTENEDOR DE LA SILLA CON ETIQUETAS FLOTANTES */}
+              <div className="relative z-10 -mt-6 sm:-mt-10 md:-mt-12 flex items-center justify-center w-full">
                 {/* Sombra de piso de estudio y resplandor dorado sutil */}
-                <div className="pointer-events-none absolute -bottom-8 left-1/2 -translate-x-1/2 w-96 sm:w-[36rem] md:w-[48rem] lg:w-[58rem] h-16 bg-black/85 rounded-full blur-3xl z-0" />
-                <div className="pointer-events-none absolute -bottom-4 left-1/2 -translate-x-1/2 w-80 sm:w-[30rem] md:w-[40rem] h-12 bg-amber-500/10 rounded-full blur-2xl z-0" />
+                <div className="pointer-events-none absolute -bottom-5 left-1/2 -translate-x-1/2 w-64 sm:w-80 md:w-[26rem] lg:w-[32rem] h-10 bg-black/85 rounded-full blur-2xl z-0" />
+                <div className="pointer-events-none absolute -bottom-3 left-1/2 -translate-x-1/2 w-56 sm:w-72 md:w-80 h-8 bg-amber-500/15 rounded-full blur-xl z-0" />
 
                 <motion.div
-                  initial={{ opacity: 0, scale: 0.88, y: 40 }}
+                  initial={{ opacity: 0, scale: 0.9, y: 30 }}
                   animate={{ opacity: 1, scale: 1, y: 0 }}
-                  transition={{ duration: 0.95, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{ duration: 0.9, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
                   className="relative flex items-center justify-center max-w-full"
                 >
                   <img
                     src="/silla.png"
                     alt="Silla y Barbero King's Barber Shop"
-                    className="w-[42rem] md:w-[56rem] lg:w-[64rem] h-auto object-contain drop-shadow-[0_35px_60px_rgba(251,191,36,0.15)] z-10 select-none pointer-events-none"
+                    className="w-[20rem] sm:w-[26rem] md:w-[32rem] lg:w-[38rem] max-h-[46vh] sm:max-h-[50vh] h-auto object-contain drop-shadow-[0_25px_50px_rgba(251,191,36,0.18)] z-10 select-none pointer-events-none"
                   />
 
-                  {/* CAPA 3 (z-20): 3 ETIQUETAS FLOTANTES CON FRAMER-MOTION */}
+                  {/* CAPA 3 (z-20): 3 ETIQUETAS FLOTANTES COMPACTAS CON FRAMER-MOTION */}
                   {floatingPills.map((pill) => {
                     const PillIcon = pill.icon;
                     return (
                       <motion.div
                         key={pill.id}
-                        animate={{ y: [0, -13, 0] }}
+                        animate={{ y: [0, -10, 0] }}
                         transition={{
                           duration: pill.duration,
                           repeat: Infinity,
                           ease: 'easeInOut',
                           delay: pill.delay
                         }}
-                        className={`absolute z-20 ${pill.positionClass} flex items-center gap-3 px-4 py-3 sm:px-5 sm:py-3.5 rounded-2xl bg-neutral-900/95 backdrop-blur-md border border-amber-400/70 shadow-[0_18px_40px_rgba(0,0,0,0.65)] text-left`}
+                        className={`absolute z-20 ${pill.positionClass} flex items-center gap-2 sm:gap-2.5 px-3 py-1.5 sm:px-3.5 sm:py-2.5 rounded-xl sm:rounded-2xl bg-neutral-900/95 backdrop-blur-md border border-amber-400/70 shadow-[0_12px_30px_rgba(0,0,0,0.65)] text-left`}
                       >
-                        <div className="w-9 h-9 rounded-xl bg-amber-400 text-neutral-900 flex items-center justify-center shrink-0">
-                          <PillIcon className="w-4 h-4 stroke-[2.5]" />
+                        <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg sm:rounded-xl bg-amber-400 text-neutral-900 flex items-center justify-center shrink-0">
+                          <PillIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4 stroke-[2.5]" />
                         </div>
-                        <div className="pr-1">
-                          <span className="block text-xs sm:text-sm font-black text-white leading-tight whitespace-nowrap">
+                        <div className="pr-0.5 sm:pr-1">
+                          <span className="block text-[11px] sm:text-xs md:text-sm font-black text-white leading-tight whitespace-nowrap">
                             {pill.title}
                           </span>
-                          <span className="block text-[10px] font-bold text-amber-400 uppercase tracking-wider mt-0.5 whitespace-nowrap">
+                          <span className="block text-[9px] sm:text-[10px] font-bold text-amber-400 uppercase tracking-wider mt-0.5 whitespace-nowrap">
                             {pill.sub}
                           </span>
                         </div>
@@ -526,12 +526,12 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
                 </motion.div>
               </div>
 
-              {/* Subtítulo y CTA debajo de la silla */}
+              {/* Subtítulo y CTA inmediatamente visibles debajo de la silla */}
               <motion.p
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.35, ease: 'easeOut' }}
-                className="mt-8 sm:mt-12 text-base sm:text-lg text-neutral-300 max-w-xl text-center font-medium"
+                transition={{ duration: 0.6, delay: 0.3, ease: 'easeOut' }}
+                className="mt-3 sm:mt-5 text-sm sm:text-base text-neutral-300 max-w-lg text-center font-medium leading-relaxed px-4"
               >
                 Elige tu sede en Nuevo Chimbote o Chimbote Centro y separa tu silla al instante sin hacer colas.
               </motion.p>
@@ -539,16 +539,16 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
               <motion.button
                 type="button"
                 onClick={scrollToFunnel}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.45, ease: 'easeOut' }}
+                transition={{ duration: 0.6, delay: 0.4, ease: 'easeOut' }}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.97 }}
-                className="mt-7 cursor-pointer group px-10 py-5 rounded-2xl bg-amber-400 hover:bg-amber-300 text-neutral-900 font-black text-base sm:text-lg uppercase tracking-tight shadow-[0_18px_45px_rgba(251,191,36,0.28)] transition-all flex items-center gap-3"
+                className="mt-4 sm:mt-5 cursor-pointer group px-8 sm:px-10 py-3.5 sm:py-4 rounded-2xl bg-amber-400 hover:bg-amber-300 text-neutral-900 font-black text-sm sm:text-base uppercase tracking-tight shadow-[0_15px_35px_rgba(251,191,36,0.28)] transition-all flex items-center gap-2.5"
               >
                 <span>Separar Silla Ahora</span>
-                <div className="w-8 h-8 rounded-xl bg-neutral-900 text-amber-400 flex items-center justify-center group-hover:translate-x-1 transition-transform">
-                  <ChevronRight className="w-5 h-5 stroke-[3]" />
+                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-neutral-900 text-amber-400 flex items-center justify-center group-hover:translate-x-1 transition-transform">
+                  <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 stroke-[3]" />
                 </div>
               </motion.button>
             </div>
