@@ -434,7 +434,7 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
           />
 
           {/* Marca de agua gigante en el fondo y texto vertical editorial */}
-          <div className="pointer-events-none select-none absolute inset-x-0 top-2 sm:top-4 flex justify-center overflow-hidden opacity-[0.035]">
+          <div className="pointer-events-none select-none absolute inset-x-0 top-2 sm:top-4 flex justify-center overflow-hidden opacity-[0.05] sm:opacity-[0.035]">
             <span className="font-black text-8xl sm:text-9xl md:text-[10rem] lg:text-[12rem] tracking-tight md:tracking-tighter whitespace-nowrap leading-none">
               KING&apos;S STUDIO
             </span>
