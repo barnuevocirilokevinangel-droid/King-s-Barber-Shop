@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   Crown,
   Scissors,
+  Armchair,
   MapPin,
   Clock,
   CheckCircle2,
@@ -283,7 +285,7 @@ const formatTimer = (totalSeconds) => {
 };
 
 // ============================================================================
-// VISTA 1: WEB PÚBLICA (Clean & Premium, Mobile-First & Responsive)
+// VISTA 1: WEB PÚBLICA (REDISEÑO "PREMIUM STUDIO" - ULTRA DARK & FRAMER MOTION)
 // ============================================================================
 function PublicBookingView({ onNewBooking, onOpenAdmin }) {
   const [selectedLocation, setSelectedLocation] = useState(LOCATIONS[0].id);
@@ -347,488 +349,649 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
     setClientPhone('');
   };
 
+  // Configuración de las 3 Etiquetas Flotantes (Pills) alrededor de la Silla
+  const floatingPills = [
+    {
+      id: 'pill-fade',
+      text: '🔥 Fade Perfecto',
+      sub: 'Precisión milimétrica',
+      positionClass: '-top-5 -left-4 sm:top-6 sm:-left-16',
+      duration: 3.4,
+      delay: 0
+    },
+    {
+      id: 'pill-price',
+      text: '⚡ Desde S/ 5',
+      sub: 'Adicionales & Cejas',
+      positionClass: 'top-1/3 -right-4 sm:top-1/2 sm:-right-20',
+      duration: 3.9,
+      delay: 0.7
+    },
+    {
+      id: 'pill-bio',
+      text: '🔪 Bioseguridad',
+      sub: 'Navajas esterilizadas',
+      positionClass: '-bottom-5 -left-2 sm:bottom-6 sm:-left-14',
+      duration: 4.3,
+      delay: 1.3
+    }
+  ];
+
   return (
-    <div className="min-h-screen bg-white text-neutral-900 flex flex-col justify-between selection:bg-amber-500 selection:text-white">
+    <div className="min-h-screen bg-neutral-950 text-white flex flex-col justify-between selection:bg-amber-400 selection:text-neutral-950 overflow-x-hidden">
       {/* ====================================================================
-          BARRA DE NAVEGACIÓN SUPERIOR (Clean & Premium)
+          BARRA DE NAVEGACIÓN SUPERIOR (Premium Studio Ultra Dark)
       ==================================================================== */}
-      <header className="sticky top-0 z-30 bg-white/90 backdrop-blur-md border-b border-neutral-200/80">
-        <div className="max-w-6xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-neutral-950 flex items-center justify-center ring-2 ring-amber-500/80 shadow-sm">
-              <Crown className="w-5 h-5 text-amber-500" />
+      <header className="sticky top-0 z-30 bg-neutral-950/85 backdrop-blur-xl border-b border-white/10">
+        <div className="max-w-6xl mx-auto px-5 sm:px-8 h-20 flex items-center justify-between">
+          <div className="flex items-center gap-3.5">
+            <div className="w-11 h-11 rounded-2xl bg-neutral-900 flex items-center justify-center border border-amber-400/60 shadow-[0_0_25px_rgba(251,191,36,0.2)]">
+              <Crown className="w-6 h-6 text-amber-400" />
             </div>
             <div>
-              <span className="font-black text-base tracking-tight text-neutral-950 block leading-none">
+              <span className="font-black text-lg tracking-tighter text-white block leading-none">
                 KING&apos;S BARBER SHOP
               </span>
-              <span className="text-[11px] font-semibold text-amber-600 tracking-wider uppercase">
+              <span className="text-[11px] font-extrabold text-amber-400 tracking-widest uppercase mt-1 block">
                 Chimbote &amp; Nuevo Chimbote
               </span>
             </div>
           </div>
 
-          <button
+          <motion.button
             type="button"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.96 }}
             onClick={scrollToFunnel}
-            className="cursor-pointer px-4 py-2 rounded-full bg-neutral-950 text-white text-xs sm:text-sm font-bold hover:bg-neutral-800 transition-all flex items-center gap-1.5 shadow-sm"
+            className="cursor-pointer px-5 py-2.5 rounded-2xl bg-amber-400 text-neutral-950 text-xs sm:text-sm font-black uppercase tracking-tight hover:bg-amber-300 transition-colors flex items-center gap-2 shadow-[0_0_30px_rgba(251,191,36,0.3)]"
           >
-            <Scissors className="w-3.5 h-3.5 text-amber-500" />
-            <span>Reservar Cita</span>
-          </button>
+            <Scissors className="w-4 h-4 text-neutral-950 stroke-[2.5]" />
+            <span>Separar Silla</span>
+          </motion.button>
         </div>
       </header>
 
       <main className="flex-1">
         {/* ====================================================================
-            1. HERO SECTION + 2. PROPUESTA DE VALOR DIFERENCIADORA
+            1. NUEVO HERO SECTION (Visual Centralizado "Premium Studio")
         ==================================================================== */}
-        <section className="relative overflow-hidden pt-10 pb-12 sm:py-16 border-b border-neutral-100">
-          {/* Destello sutil dorado de fondo */}
-          <div className="pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 w-[36rem] h-[18rem] bg-amber-400/10 rounded-full blur-3xl" />
+        <section className="relative overflow-hidden pt-12 pb-20 sm:py-24 border-b border-white/10">
+          {/* Iluminación ambiental dorada y retícula sutil de estudio */}
+          <div
+            className="pointer-events-none absolute inset-0 opacity-[0.03]"
+            style={{
+              backgroundImage:
+                'linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)',
+              backgroundSize: '64px 64px'
+            }}
+          />
+          <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[38rem] h-[38rem] bg-amber-400/10 rounded-full blur-[130px]" />
 
-          <div className="max-w-4xl mx-auto px-5 sm:px-8 text-center flex flex-col items-center">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-50 border border-amber-500/30 text-neutral-900 text-xs font-bold mb-6 shadow-sm">
-              <Sparkles className="w-3.5 h-3.5 text-amber-500" />
-              <span>EXPERIENCIA URBANA PREMIUM • CERO COLAS</span>
+          <div className="relative z-10 max-w-5xl mx-auto px-5 sm:px-8 text-center flex flex-col items-center">
+            {/* Badge Superior */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-neutral-900 border border-amber-400/40 text-amber-400 text-xs font-black uppercase tracking-widest mb-6 shadow-lg"
+            >
+              <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+              <span>PREMIUM STUDIO • EXPERIENCIA VIP CERO COLAS</span>
+            </motion.div>
+
+            {/* TÍTULO GIGANTE CENTRADO EN LA PARTE SUPERIOR */}
+            <motion.h1
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="text-5xl sm:text-7xl md:text-8xl lg:text-[6.2rem] font-black tracking-tighter uppercase text-white leading-[0.92] max-w-4xl"
+            >
+              EL ESTILO <span className="text-amber-400">QUE MANDA</span>
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="mt-5 text-base sm:text-xl text-neutral-300 max-w-xl font-semibold"
+            >
+              Maestría en degradados, ritual de barba y atención cronometrada. Separa tu silla en segundos sin esperar.
+            </motion.p>
+
+            {/* CENTRO VISUAL: SILLA DE BARBERÍA PREMIUM ILUMINADA + 3 PILLS EN MOVIMIENTO */}
+            <div className="relative my-14 sm:my-16 flex items-center justify-center">
+              {/* Halo dorado pulsante exterior */}
+              <motion.div
+                animate={{ scale: [1, 1.05, 1], opacity: [0.35, 0.6, 0.35] }}
+                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+                className="pointer-events-none absolute w-72 h-72 sm:w-96 sm:h-96 rounded-full bg-amber-400/15 blur-2xl"
+              />
+
+              {/* Contenedor Circular Central con Gradiente Radial Oscuro y Borde Dorado */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.88 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.7, delay: 0.25 }}
+                style={{
+                  background:
+                    'radial-gradient(circle at 50% 35%, rgba(251, 191, 36, 0.22) 0%, rgba(23, 23, 23, 0.96) 62%, rgba(10, 10, 10, 1) 100%)'
+                }}
+                className="relative w-72 h-72 sm:w-88 sm:h-88 md:w-96 md:h-96 rounded-full border-2 border-amber-400 shadow-[0_0_70px_rgba(251,191,36,0.22)] flex flex-col items-center justify-center p-8"
+              >
+                {/* Anillo interno decorativo */}
+                <div className="pointer-events-none absolute inset-3 rounded-full border border-amber-400/25 border-dashed" />
+
+                {/* Corona superior sobre la silla */}
+                <div className="mb-2 px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/40 flex items-center gap-1.5">
+                  <Crown className="w-4 h-4 text-amber-400" />
+                  <span className="text-[11px] font-black uppercase tracking-widest text-amber-400">
+                    Trono VIP King&apos;s
+                  </span>
+                </div>
+
+                {/* Icono Gigante de Silla de Barbería Iluminada */}
+                <div className="relative flex items-center justify-center my-2">
+                  <Armchair className="w-28 h-28 sm:w-36 sm:h-36 text-amber-400 stroke-[1.6] drop-shadow-[0_0_30px_rgba(251,191,36,0.55)]" />
+                  <Scissors className="w-8 h-8 text-white absolute -bottom-1 -right-2 rotate-[-35deg] drop-shadow" />
+                </div>
+
+                <span className="mt-3 text-xs sm:text-sm font-black uppercase tracking-widest text-white/90">
+                  Sillas Listas Hoy
+                </span>
+                <span className="text-[11px] font-bold text-amber-400 mt-0.5">
+                  Mascarilla Negra + Masaje Gratis
+                </span>
+
+                {/* 3 ETIQUETAS (PILLS) FLOTANDO EN BUCLE ASÍNCRONO CONTINUO */}
+                {floatingPills.map((pill) => (
+                  <motion.div
+                    key={pill.id}
+                    animate={{ y: [0, -14, 0] }}
+                    transition={{
+                      duration: pill.duration,
+                      repeat: Infinity,
+                      ease: 'easeInOut',
+                      delay: pill.delay
+                    }}
+                    className={`absolute z-20 ${pill.positionClass} px-4 py-3 sm:px-5 sm:py-3.5 rounded-2xl bg-neutral-900 border-2 border-amber-400 shadow-[0_14px_35px_rgba(0,0,0,0.85)] text-left whitespace-nowrap`}
+                  >
+                    <span className="block text-sm sm:text-base font-black text-white tracking-tight leading-none">
+                      {pill.text}
+                    </span>
+                    <span className="block text-[11px] font-extrabold text-amber-400 uppercase tracking-wider mt-1">
+                      {pill.sub}
+                    </span>
+                  </motion.div>
+                ))}
+              </motion.div>
             </div>
 
-            {/* Titular Principal */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-neutral-950 leading-[1.06] mb-4">
-              Tu estilo,{' '}
-              <span className="underline decoration-amber-500 decoration-4 underline-offset-8">
-                sin esperar de más.
-              </span>
-            </h1>
-
-            {/* Subtítulo */}
-            <p className="text-base sm:text-xl text-neutral-600 max-w-xl font-medium mb-8">
-              Elige tu sede y separa tu silla en segundos.
-            </p>
-
-            {/* Botón Negro CTA: "Agendar Corte" */}
-            <button
+            {/* BOTÓN PRINCIPAL DEBAJO DE LA SILLA: "Separar Silla Ahora" */}
+            <motion.button
               type="button"
               onClick={scrollToFunnel}
-              className="cursor-pointer group px-8 py-4 rounded-2xl bg-neutral-950 text-white font-black text-base sm:text-lg tracking-tight shadow-[0_14px_30px_rgba(0,0,0,0.18)] hover:-translate-y-1 hover:shadow-xl active:scale-[0.98] transition-all duration-300 flex items-center gap-3"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.97 }}
+              className="cursor-pointer group px-10 py-5 rounded-2xl bg-amber-400 hover:bg-amber-300 text-neutral-950 font-black text-lg sm:text-xl uppercase tracking-tighter shadow-[0_18px_45px_rgba(251,191,36,0.32)] hover:scale-105 transition-all duration-300 flex items-center gap-3.5"
             >
-              <span>Agendar Corte</span>
-              <div className="w-7 h-7 rounded-full bg-amber-500 text-neutral-950 flex items-center justify-center group-hover:translate-x-0.5 transition-transform">
-                <ChevronRight className="w-4 h-4 stroke-[3]" />
+              <span>Separar Silla Ahora</span>
+              <div className="w-8 h-8 rounded-xl bg-neutral-950 text-amber-400 flex items-center justify-center group-hover:translate-x-1 transition-transform">
+                <ChevronRight className="w-5 h-5 stroke-[3]" />
               </div>
-            </button>
+            </motion.button>
 
-            {/* 2. PROPUESTA DE VALOR (Extraída del diagnóstico) */}
-            <div className="mt-10 w-full max-w-3xl rounded-3xl bg-gradient-to-r from-amber-50/90 via-white to-amber-50/90 border-2 border-amber-500/40 p-5 sm:p-6 shadow-[0_10px_35px_rgba(245,158,11,0.1)] flex flex-col sm:flex-row items-center gap-4 text-left transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
-              <div className="w-14 h-14 rounded-2xl bg-neutral-950 text-amber-500 flex items-center justify-center shrink-0 ring-4 ring-amber-500/20">
+            {/* Propuesta de Valor Diferenciadora (Adaptada a Dark Studio) */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.35 }}
+              className="mt-12 w-full max-w-3xl rounded-3xl bg-white/5 backdrop-blur-xl border border-amber-400/30 p-5 sm:p-6 shadow-2xl flex flex-col sm:flex-row items-center gap-4 text-left"
+            >
+              <div className="w-14 h-14 rounded-2xl bg-neutral-900 border border-amber-400 text-amber-400 flex items-center justify-center shrink-0 shadow-[0_0_20px_rgba(251,191,36,0.2)]">
                 <Crown className="w-7 h-7" />
               </div>
               <div className="space-y-1 text-center sm:text-left">
-                <div className="inline-flex items-center gap-1.5 text-[11px] font-black uppercase tracking-widest text-amber-600">
-                  <Star className="w-3.5 h-3.5 fill-amber-500 text-amber-500" />
+                <div className="inline-flex items-center gap-1.5 text-[11px] font-black uppercase tracking-widest text-amber-400">
+                  <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
                   <span>Beneficio Exclusivo King&apos;s Incluido Gratis</span>
                 </div>
-                <p className="text-base sm:text-lg font-extrabold text-neutral-950 leading-snug">
+                <p className="text-base sm:text-lg font-black text-white leading-snug tracking-tight">
                   &ldquo;Todos nuestros servicios incluyen mascarilla de puntos negros y masajes
                   relajantes.&rdquo;
                 </p>
               </div>
-            </div>
+            </motion.div>
           </div>
         </section>
 
         {/* ====================================================================
-            3. EMBUDO DE RESERVA MOBILE-FIRST (4 Pasos Interactivos o Éxito)
+            2. WIDGET DE RESERVAS CON GLASSMORPHISM PREMIUM Y ANIMACIÓN PROGRESIVA
         ==================================================================== */}
-        <section ref={funnelRef} className="py-12 sm:py-16 scroll-mt-16 bg-neutral-50/60">
+        <section ref={funnelRef} className="py-16 sm:py-24 scroll-mt-20 relative">
           <div className="max-w-3xl mx-auto px-5 sm:px-8">
-            {bookingConfirmed ? (
-              /* PANTALLA DE ÉXITO POST-WEBHOOK N8N */
-              <div className="bg-white border-2 border-amber-500 rounded-3xl p-7 sm:p-10 shadow-2xl text-center space-y-6 animate-in fade-in duration-300">
-                <div className="w-20 h-20 rounded-full bg-neutral-950 text-amber-500 ring-8 ring-amber-500/15 mx-auto flex items-center justify-center shadow-lg">
-                  <CheckCircle2 className="w-10 h-10" />
-                </div>
-
-                <div className="space-y-2">
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-500/30 text-emerald-700 text-xs font-extrabold uppercase tracking-wider">
-                    <Webhook className="w-3.5 h-3.5" /> Webhook n8n Disparado • Cita Sincronizada
-                  </span>
-                  <h2 className="text-2xl sm:text-3xl font-black text-neutral-950">
-                    ¡Reserva Confirmada!
-                  </h2>
-                  <p className="text-base sm:text-lg font-bold text-amber-600">
-                    Te hemos enviado los detalles por WhatsApp
-                  </p>
-                </div>
-
-                {/* Resumen del Ticket Confirmado */}
-                <div className="bg-neutral-50 border border-neutral-200 rounded-2xl p-5 text-left space-y-3 max-w-md mx-auto">
-                  <div className="flex items-center justify-between text-xs border-b border-neutral-200 pb-2.5">
-                    <span className="font-extrabold uppercase tracking-wider text-neutral-500">
-                      Resumen de tu Silla
-                    </span>
-                    <span className="font-bold text-amber-600">{bookingConfirmed.time}</span>
+            <AnimatePresence mode="wait">
+              {bookingConfirmed ? (
+                /* PANTALLA DE ÉXITO POST-WEBHOOK N8N */
+                <motion.div
+                  key="booking-confirmed"
+                  initial={{ opacity: 0, y: 20, scale: 0.97 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.35 }}
+                  className="bg-white/5 backdrop-blur-xl border-2 border-amber-400 rounded-3xl p-7 sm:p-10 shadow-2xl text-center space-y-6"
+                >
+                  <div className="w-20 h-20 rounded-full bg-neutral-900 text-amber-400 border-2 border-amber-400 mx-auto flex items-center justify-center shadow-[0_0_30px_rgba(251,191,36,0.3)]">
+                    <CheckCircle2 className="w-10 h-10" />
                   </div>
 
-                  <div className="space-y-2 text-sm">
-                    <div className="flex justify-between">
-                      <span className="text-neutral-500">Cliente:</span>
-                      <strong className="text-neutral-900">{bookingConfirmed.clientName}</strong>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-neutral-500">Sede:</span>
-                      <strong className="text-neutral-900 text-right">
-                        {bookingConfirmed.location}
-                      </strong>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-neutral-500">Servicio:</span>
-                      <strong className="text-neutral-900">{bookingConfirmed.serviceName}</strong>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-neutral-500">Barbero:</span>
-                      <strong className="text-neutral-900">{bookingConfirmed.barberName}</strong>
-                    </div>
-                    <div className="flex justify-between pt-2 border-t border-neutral-200 text-base">
-                      <span className="font-bold text-neutral-900">Total a pagar en local:</span>
-                      <strong className="font-black text-amber-600">
-                        S/ {bookingConfirmed.price}.00
-                      </strong>
-                    </div>
-                  </div>
-
-                  <div className="bg-amber-50 border border-amber-500/30 rounded-xl p-3 text-xs text-neutral-800 font-semibold flex items-center gap-2">
-                    <Sparkles className="w-4 h-4 text-amber-500 shrink-0" />
-                    <span>
-                      Incluye gratis tu mascarilla de puntos negros y masaje relajante.
+                  <div className="space-y-2">
+                    <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-emerald-500/15 border border-emerald-400/40 text-emerald-300 text-xs font-extrabold uppercase tracking-wider">
+                      <Webhook className="w-3.5 h-3.5" /> Webhook n8n Disparado • Cita Sincronizada
                     </span>
-                  </div>
-                </div>
-
-                <div className="flex flex-col sm:flex-row justify-center gap-3 pt-2 max-w-md mx-auto">
-                  <button
-                    type="button"
-                    onClick={handleResetBooking}
-                    className="cursor-pointer flex-1 py-3.5 px-5 rounded-xl border-2 border-neutral-900 text-neutral-900 font-extrabold text-sm hover:bg-neutral-100 transition-all"
-                  >
-                    Hacer otra reserva
-                  </button>
-                  <button
-                    type="button"
-                    onClick={onOpenAdmin}
-                    className="cursor-pointer flex-1 py-3.5 px-5 rounded-xl bg-neutral-950 text-white font-extrabold text-sm hover:-translate-y-0.5 hover:shadow-lg transition-all flex items-center justify-center gap-1.5"
-                  >
-                    <span>Ver en Monitor Admin</span>
-                    <ArrowUpRight className="w-4 h-4 text-amber-500" />
-                  </button>
-                </div>
-              </div>
-            ) : (
-              /* FORMULARIO EMBUDO DE 4 PASOS */
-              <form
-                onSubmit={handleConfirmBooking}
-                className="bg-white border border-neutral-200/90 rounded-3xl p-6 sm:p-9 shadow-[0_20px_50px_rgba(0,0,0,0.06)] space-y-9"
-              >
-                {/* Encabezado del Embudo */}
-                <div className="flex items-center justify-between border-b border-neutral-100 pb-5">
-                  <div>
-                    <span className="text-xs font-extrabold uppercase tracking-widest text-amber-600 block">
-                      Reserva Express en 4 Pasos
-                    </span>
-                    <h2 className="text-2xl font-black text-neutral-950">
-                      Configura tu experiencia
+                    <h2 className="text-3xl sm:text-4xl font-black tracking-tighter uppercase text-white">
+                      ¡Reserva Confirmada!
                     </h2>
-                  </div>
-                  <div className="w-11 h-11 rounded-2xl bg-amber-50 border border-amber-500/30 flex items-center justify-center text-amber-500">
-                    <Calendar className="w-5 h-5" />
-                  </div>
-                </div>
-
-                {/* PASO 1: ZONA */}
-                <div className="space-y-3.5">
-                  <div className="flex items-center gap-2.5">
-                    <span className="w-7 h-7 rounded-full bg-neutral-950 text-amber-500 font-black text-xs flex items-center justify-center">
-                      1
-                    </span>
-                    <h3 className="text-lg font-extrabold text-neutral-950">Elige tu Sede</h3>
+                    <p className="text-base sm:text-lg font-bold text-amber-400">
+                      Te hemos enviado los detalles por WhatsApp
+                    </p>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                    {LOCATIONS.map((loc) => {
-                      const isSelected = selectedLocation === loc.id;
-                      return (
-                        <button
-                          key={loc.id}
-                          type="button"
-                          onClick={() => setSelectedLocation(loc.id)}
-                          className={`cursor-pointer text-left p-4 sm:p-5 rounded-2xl border-2 transition-all duration-200 hover:-translate-y-1 hover:shadow-xl active:scale-[0.99] flex flex-col justify-between gap-2 ${
-                            isSelected
-                              ? 'border-neutral-950 bg-neutral-950 text-white ring-2 ring-amber-500/60 shadow-lg'
-                              : 'border-neutral-200 bg-white text-neutral-900 hover:border-amber-500/60'
-                          }`}
-                        >
-                          <div className="flex items-start justify-between w-full gap-2">
-                            <span
-                              className={`text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full ${
-                                isSelected
-                                  ? 'bg-amber-500 text-neutral-950'
-                                  : 'bg-neutral-100 text-neutral-600'
-                              }`}
-                            >
-                              {loc.tag}
-                            </span>
-                            <MapPin
-                              className={`w-4 h-4 shrink-0 ${
-                                isSelected ? 'text-amber-500' : 'text-amber-500'
-                              }`}
-                            />
-                          </div>
-
-                          <div>
-                            <p className="font-extrabold text-base leading-snug">{loc.name}</p>
-                            <p
-                              className={`text-xs mt-1 ${
-                                isSelected ? 'text-neutral-300' : 'text-neutral-500'
-                              }`}
-                            >
-                              {loc.wait}
-                            </p>
-                          </div>
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
-
-                {/* PASO 2: SERVICIOS */}
-                <div className="space-y-3.5">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2.5">
-                      <span className="w-7 h-7 rounded-full bg-neutral-950 text-amber-500 font-black text-xs flex items-center justify-center">
-                        2
+                  {/* Resumen del Ticket Confirmado */}
+                  <div className="bg-neutral-900/90 border border-white/10 rounded-2xl p-5 text-left space-y-3 max-w-md mx-auto">
+                    <div className="flex items-center justify-between text-xs border-b border-white/10 pb-2.5">
+                      <span className="font-extrabold uppercase tracking-wider text-neutral-400">
+                        Resumen de tu Silla
                       </span>
-                      <h3 className="text-lg font-extrabold text-neutral-950">
-                        Selecciona tu Servicio
+                      <span className="font-black text-amber-400">{bookingConfirmed.time}</span>
+                    </div>
+
+                    <div className="space-y-2 text-sm">
+                      <div className="flex justify-between">
+                        <span className="text-neutral-400">Cliente:</span>
+                        <strong className="text-white">{bookingConfirmed.clientName}</strong>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-neutral-400">Sede:</span>
+                        <strong className="text-white text-right">
+                          {bookingConfirmed.location}
+                        </strong>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-neutral-400">Servicio:</span>
+                        <strong className="text-white">{bookingConfirmed.serviceName}</strong>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-neutral-400">Barbero:</span>
+                        <strong className="text-white">{bookingConfirmed.barberName}</strong>
+                      </div>
+                      <div className="flex justify-between pt-2 border-t border-white/10 text-base">
+                        <span className="font-bold text-white">Total a pagar en local:</span>
+                        <strong className="font-black text-amber-400">
+                          S/ {bookingConfirmed.price}.00
+                        </strong>
+                      </div>
+                    </div>
+
+                    <div className="bg-amber-400/10 border border-amber-400/30 rounded-xl p-3 text-xs text-amber-300 font-semibold flex items-center gap-2">
+                      <Sparkles className="w-4 h-4 text-amber-400 shrink-0" />
+                      <span>
+                        Incluye gratis tu mascarilla de puntos negros y masaje relajante.
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col sm:flex-row justify-center gap-3 pt-2 max-w-md mx-auto">
+                    <button
+                      type="button"
+                      onClick={handleResetBooking}
+                      className="cursor-pointer flex-1 py-3.5 px-5 rounded-xl border-2 border-white/20 text-white font-extrabold text-sm hover:bg-white/10 transition-all"
+                    >
+                      Hacer otra reserva
+                    </button>
+                    <button
+                      type="button"
+                      onClick={onOpenAdmin}
+                      className="cursor-pointer flex-1 py-3.5 px-5 rounded-xl bg-amber-400 text-neutral-950 font-black text-sm hover:bg-amber-300 transition-all flex items-center justify-center gap-1.5"
+                    >
+                      <span>Ver en Monitor Admin</span>
+                      <ArrowUpRight className="w-4 h-4 text-neutral-950" />
+                    </button>
+                  </div>
+                </motion.div>
+              ) : (
+                /* CONTENEDOR GLASSMORPHISM PREMIUM DEL WIDGET DE RESERVAS */
+                <motion.form
+                  key="booking-form"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.45 }}
+                  onSubmit={handleConfirmBooking}
+                  className="bg-white/5 backdrop-blur-xl border border-white/10 shadow-2xl rounded-3xl p-6 sm:p-10 space-y-10"
+                >
+                  {/* Encabezado del Embudo */}
+                  <div className="flex items-center justify-between border-b border-white/10 pb-6">
+                    <div>
+                      <span className="text-xs font-black uppercase tracking-widest text-amber-400 block mb-1">
+                        Reserva Express en 4 Pasos
+                      </span>
+                      <h2 className="text-3xl sm:text-4xl font-black tracking-tighter uppercase text-white">
+                        CONFIGURA TU EXPERIENCIA
+                      </h2>
+                    </div>
+                    <div className="w-12 h-12 rounded-2xl bg-neutral-900 border border-amber-400/50 flex items-center justify-center text-amber-400 shrink-0">
+                      <Calendar className="w-6 h-6" />
+                    </div>
+                  </div>
+
+                  {/* PASO 1: SEDE */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.35 }}
+                    className="space-y-4"
+                  >
+                    <div className="flex items-center gap-3">
+                      <span className="w-8 h-8 rounded-full bg-amber-400 text-neutral-950 font-black text-sm flex items-center justify-center">
+                        1
+                      </span>
+                      <h3 className="text-xl font-black tracking-tight uppercase text-white">
+                        Elige tu Sede
                       </h3>
                     </div>
-                    <span className="text-xs font-bold text-amber-600">+ Mascarilla y Masaje</span>
-                  </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
-                    {SERVICES.map((srv) => {
-                      const isSelected = selectedService === srv.id;
-                      return (
-                        <button
-                          key={srv.id}
-                          type="button"
-                          onClick={() => setSelectedService(srv.id)}
-                          className={`cursor-pointer text-left p-4 rounded-2xl border-2 transition-all duration-200 hover:-translate-y-1 hover:shadow-xl active:scale-[0.99] flex flex-col justify-between gap-3 ${
-                            isSelected
-                              ? 'border-neutral-950 bg-neutral-950 text-white ring-2 ring-amber-500/60 shadow-lg'
-                              : 'border-neutral-200 bg-white text-neutral-900 hover:border-amber-500/60'
-                          }`}
-                        >
-                          <div className="space-y-1">
-                            <div className="flex items-center justify-between">
-                              <span className="font-black text-base">{srv.name}</span>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      {LOCATIONS.map((loc) => {
+                        const isSelected = selectedLocation === loc.id;
+                        return (
+                          <button
+                            key={loc.id}
+                            type="button"
+                            onClick={() => setSelectedLocation(loc.id)}
+                            className={`cursor-pointer text-left p-5 rounded-2xl border-2 transition-all duration-200 hover:-translate-y-1 flex flex-col justify-between gap-2.5 ${
+                              isSelected
+                                ? 'border-amber-400 bg-neutral-900 text-white shadow-[0_0_30px_rgba(251,191,36,0.18)]'
+                                : 'border-white/10 bg-neutral-900/50 text-neutral-200 hover:border-amber-400/50'
+                            }`}
+                          >
+                            <div className="flex items-start justify-between w-full gap-2">
                               <span
-                                className={`text-sm font-black px-2.5 py-0.5 rounded-lg ${
+                                className={`text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full ${
                                   isSelected
-                                    ? 'bg-amber-500 text-neutral-950'
-                                    : 'bg-amber-50 text-amber-700 border border-amber-500/30'
+                                    ? 'bg-amber-400 text-neutral-950'
+                                    : 'bg-white/10 text-neutral-300'
                                 }`}
                               >
-                                S/ {srv.price}
+                                {loc.tag}
                               </span>
+                              <MapPin className="w-4 h-4 shrink-0 text-amber-400" />
                             </div>
-                            <p
-                              className={`text-xs leading-relaxed ${
-                                isSelected ? 'text-neutral-300' : 'text-neutral-500'
+
+                            <div>
+                              <p className="font-black text-base sm:text-lg leading-snug text-white">
+                                {loc.name}
+                              </p>
+                              <p className="text-xs font-semibold text-amber-400/90 mt-1">
+                                {loc.wait}
+                              </p>
+                            </div>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </motion.div>
+
+                  {/* PASO 2: SERVICIOS (Se anima con framer-motion cuando cambia la sede) */}
+                  <motion.div
+                    key={`services-step-${selectedLocation}`}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.35 }}
+                    className="space-y-4"
+                  >
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <span className="w-8 h-8 rounded-full bg-amber-400 text-neutral-950 font-black text-sm flex items-center justify-center">
+                          2
+                        </span>
+                        <h3 className="text-xl font-black tracking-tight uppercase text-white">
+                          Selecciona tu Servicio
+                        </h3>
+                      </div>
+                      <span className="text-xs font-black uppercase tracking-wider text-amber-400">
+                        + Mascarilla y Masaje
+                      </span>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                      {SERVICES.map((srv) => {
+                        const isSelected = selectedService === srv.id;
+                        return (
+                          <button
+                            key={srv.id}
+                            type="button"
+                            onClick={() => setSelectedService(srv.id)}
+                            className={`cursor-pointer text-left p-5 rounded-2xl border-2 transition-all duration-200 hover:-translate-y-1 flex flex-col justify-between gap-3 ${
+                              isSelected
+                                ? 'border-amber-400 bg-neutral-900 text-white shadow-[0_0_30px_rgba(251,191,36,0.18)]'
+                                : 'border-white/10 bg-neutral-900/50 text-neutral-200 hover:border-amber-400/50'
+                            }`}
+                          >
+                            <div className="space-y-1.5">
+                              <div className="flex items-center justify-between gap-2">
+                                <span className="font-black text-base text-white">{srv.name}</span>
+                                <span
+                                  className={`text-sm font-black px-2.5 py-0.5 rounded-lg shrink-0 ${
+                                    isSelected
+                                      ? 'bg-amber-400 text-neutral-950'
+                                      : 'bg-amber-400/15 text-amber-400 border border-amber-400/30'
+                                  }`}
+                                >
+                                  S/ {srv.price}
+                                </span>
+                              </div>
+                              <p className="text-xs text-neutral-300 leading-relaxed">
+                                {srv.subtitle}
+                              </p>
+                            </div>
+
+                            <div className="text-[11px] font-bold pt-2.5 border-t border-white/10 text-amber-400 flex items-center gap-1">
+                              <Sparkles className="w-3.5 h-3.5 shrink-0" />
+                              <span>{srv.duration} • Mascarilla gratis</span>
+                            </div>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </motion.div>
+
+                  {/* PASO 3: BARBERO (Se anima al elegir sede o servicio) */}
+                  <motion.div
+                    key={`barber-step-${selectedLocation}-${selectedService}`}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.35 }}
+                    className="space-y-4"
+                  >
+                    <div className="flex items-center gap-3">
+                      <span className="w-8 h-8 rounded-full bg-amber-400 text-neutral-950 font-black text-sm flex items-center justify-center">
+                        3
+                      </span>
+                      <h3 className="text-xl font-black tracking-tight uppercase text-white">
+                        Elige tu Barbero
+                      </h3>
+                    </div>
+
+                    <div className="grid grid-cols-3 gap-3.5">
+                      {BARBERS.map((barber) => {
+                        const isSelected = selectedBarber === barber.id;
+                        return (
+                          <button
+                            key={barber.id}
+                            type="button"
+                            onClick={() => setSelectedBarber(barber.id)}
+                            className={`cursor-pointer p-4 sm:p-5 rounded-2xl border-2 text-center transition-all duration-200 hover:-translate-y-1 flex flex-col items-center ${
+                              isSelected
+                                ? 'border-amber-400 bg-neutral-900 text-white shadow-[0_0_30px_rgba(251,191,36,0.18)]'
+                                : 'border-white/10 bg-neutral-900/50 text-neutral-200 hover:border-amber-400/50'
+                            }`}
+                          >
+                            <span
+                              className={`text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full mb-3 ${
+                                isSelected
+                                  ? 'bg-amber-400 text-neutral-950'
+                                  : 'bg-white/10 text-amber-400'
                               }`}
                             >
-                              {srv.subtitle}
+                              {barber.badge}
+                            </span>
+
+                            <div
+                              className={`w-14 h-14 rounded-full flex items-center justify-center text-base font-black mb-2 ring-2 ${
+                                isSelected
+                                  ? 'bg-amber-400 text-neutral-950 ring-amber-200'
+                                  : 'bg-neutral-950 text-amber-400 ring-amber-400/40'
+                              }`}
+                            >
+                              {barber.initials}
+                            </div>
+
+                            <p className="font-black text-sm sm:text-base text-white">
+                              {barber.name}
                             </p>
-                          </div>
-
-                          <div
-                            className={`text-[11px] font-semibold pt-2 border-t flex items-center gap-1 ${
-                              isSelected
-                                ? 'border-white/15 text-amber-400'
-                                : 'border-neutral-100 text-amber-600'
-                            }`}
-                          >
-                            <Sparkles className="w-3 h-3 shrink-0" />
-                            <span>{srv.duration} • Mascarilla gratis</span>
-                          </div>
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
-
-                {/* PASO 3: BARBERO */}
-                <div className="space-y-3.5">
-                  <div className="flex items-center gap-2.5">
-                    <span className="w-7 h-7 rounded-full bg-neutral-950 text-amber-500 font-black text-xs flex items-center justify-center">
-                      3
-                    </span>
-                    <h3 className="text-lg font-extrabold text-neutral-950">Elige tu Barbero</h3>
-                  </div>
-
-                  <div className="grid grid-cols-3 gap-3">
-                    {BARBERS.map((barber) => {
-                      const isSelected = selectedBarber === barber.id;
-                      return (
-                        <button
-                          key={barber.id}
-                          type="button"
-                          onClick={() => setSelectedBarber(barber.id)}
-                          className={`cursor-pointer p-4 rounded-2xl border-2 text-center transition-all duration-200 hover:-translate-y-1 hover:shadow-xl active:scale-[0.98] flex flex-col items-center ${
-                            isSelected
-                              ? 'border-neutral-950 bg-neutral-950 text-white ring-2 ring-amber-500/60 shadow-lg'
-                              : 'border-neutral-200 bg-white text-neutral-900 hover:border-amber-500/60'
-                          }`}
-                        >
-                          <span
-                            className={`text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full mb-2.5 ${
-                              isSelected
-                                ? 'bg-amber-500 text-neutral-950'
-                                : 'bg-amber-50 text-amber-700 border border-amber-500/30'
-                            }`}
-                          >
-                            {barber.badge}
-                          </span>
-
-                          <div
-                            className={`w-14 h-14 rounded-full flex items-center justify-center text-base font-black mb-2 ring-2 ${
-                              isSelected
-                                ? 'bg-amber-500 text-neutral-950 ring-amber-300'
-                                : 'bg-neutral-950 text-amber-500 ring-amber-500/40'
-                            }`}
-                          >
-                            {barber.initials}
-                          </div>
-
-                          <p className="font-extrabold text-sm">{barber.name}</p>
-                          <p
-                            className={`text-[11px] mt-0.5 line-clamp-1 ${
-                              isSelected ? 'text-neutral-300' : 'text-neutral-500'
-                            }`}
-                          >
-                            {barber.role}
-                          </p>
-                          <span className="text-[11px] font-bold text-amber-500 mt-1 flex items-center gap-0.5">
-                            ★ {barber.rating}
-                          </span>
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
-
-                {/* PASO 4: HORARIO + DATOS DE CONTACTO PARA WHATSAPP */}
-                <div className="space-y-3.5">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2.5">
-                      <span className="w-7 h-7 rounded-full bg-neutral-950 text-amber-500 font-black text-xs flex items-center justify-center">
-                        4
-                      </span>
-                      <h3 className="text-lg font-extrabold text-neutral-950">Selecciona Horario</h3>
+                            <p className="text-[11px] text-neutral-400 mt-0.5 line-clamp-1">
+                              {barber.role}
+                            </p>
+                            <span className="text-xs font-black text-amber-400 mt-1.5 flex items-center gap-0.5">
+                              ★ {barber.rating}
+                            </span>
+                          </button>
+                        );
+                      })}
                     </div>
-                    <span className="text-xs text-neutral-500 font-medium">Turnos de hoy</span>
-                  </div>
+                  </motion.div>
 
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-                    {TIME_SLOTS.map((slot) => {
-                      const isSelected = selectedTime === slot;
-                      return (
-                        <button
-                          key={slot}
-                          type="button"
-                          onClick={() => setSelectedTime(slot)}
-                          className={`cursor-pointer py-3 px-3 rounded-xl border-2 font-extrabold text-xs sm:text-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md flex items-center justify-center gap-1.5 ${
-                            isSelected
-                              ? 'border-neutral-950 bg-neutral-950 text-white ring-2 ring-amber-500/60'
-                              : 'border-neutral-200 bg-white text-neutral-800 hover:border-amber-500/60'
-                          }`}
-                        >
-                          <Clock className="w-3.5 h-3.5 text-amber-500" />
-                          <span>{slot}</span>
-                        </button>
-                      );
-                    })}
-                  </div>
-
-                  {/* Inputs limpios para enviar confirmación por WhatsApp */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-3">
-                    <div>
-                      <label className="text-xs font-bold text-neutral-600 block mb-1">
-                        Tu Nombre
-                      </label>
-                      <input
-                        type="text"
-                        placeholder="Ej. Sebastián Rojas"
-                        value={clientName}
-                        onChange={(e) => setClientName(e.target.value)}
-                        className="w-full px-4 py-3 rounded-xl border border-neutral-300 focus:border-neutral-950 focus:ring-2 focus:ring-amber-500/30 outline-none text-sm font-medium"
-                      />
-                    </div>
-                    <div>
-                      <label className="text-xs font-bold text-neutral-600 block mb-1">
-                        Tu WhatsApp (Para enviarte el ticket)
-                      </label>
-                      <input
-                        type="tel"
-                        placeholder="Ej. 943 123 456"
-                        value={clientPhone}
-                        onChange={(e) => setClientPhone(e.target.value)}
-                        className="w-full px-4 py-3 rounded-xl border border-neutral-300 focus:border-neutral-950 focus:ring-2 focus:ring-amber-500/30 outline-none text-sm font-medium"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Resumen Pre-Confirmación y Botón Negro Sólido */}
-                <div className="pt-2 space-y-4">
-                  <div className="bg-neutral-50 border border-neutral-200 rounded-2xl p-4 flex flex-wrap items-center justify-between gap-3">
-                    <div className="text-xs sm:text-sm text-neutral-700 space-y-0.5">
-                      <p className="font-extrabold text-neutral-950">
-                        {currentSrvObj.name} con {currentBrbObj.name} ({currentBrbObj.badge})
-                      </p>
-                      <p className="text-xs text-neutral-500">
-                        📍 {currentLocObj.shortName} • ⏰ {selectedTime} • ✨ Incluye mascarilla y
-                        masaje
-                      </p>
-                    </div>
-                    <div className="text-right">
-                      <span className="text-xs text-neutral-500 block">Total</span>
-                      <span className="text-xl font-black text-neutral-950">
-                        S/ {currentSrvObj.price}.00
-                      </span>
-                    </div>
-                  </div>
-
-                  <button
-                    type="submit"
-                    disabled={isSendingWebhook}
-                    className="cursor-pointer w-full py-4 px-6 rounded-2xl bg-neutral-950 text-white font-black text-base sm:text-lg tracking-tight shadow-[0_14px_30px_rgba(0,0,0,0.2)] hover:-translate-y-1 hover:shadow-xl active:scale-[0.99] transition-all duration-300 flex items-center justify-center gap-3 disabled:opacity-70"
+                  {/* PASO 4: HORARIO + CONTACTO (Se anima con framer-motion cuando selecciona barbero o sede) */}
+                  <motion.div
+                    key={`time-step-${selectedLocation}-${selectedBarber}`}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.35 }}
+                    className="space-y-4"
                   >
-                    {isSendingWebhook ? (
-                      <>
-                        <RefreshCw className="w-5 h-5 text-amber-500 animate-spin" />
-                        <span>Sincronizando con n8n &amp; WhatsApp...</span>
-                      </>
-                    ) : (
-                      <>
-                        <MessageCircle className="w-5 h-5 text-amber-500" />
-                        <span>Confirmar Reserva Instantánea</span>
-                        <ChevronRight className="w-5 h-5 text-amber-500" />
-                      </>
-                    )}
-                  </button>
-                </div>
-              </form>
-            )}
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <span className="w-8 h-8 rounded-full bg-amber-400 text-neutral-950 font-black text-sm flex items-center justify-center">
+                          4
+                        </span>
+                        <h3 className="text-xl font-black tracking-tight uppercase text-white">
+                          Selecciona Horario
+                        </h3>
+                      </div>
+                      <span className="text-xs text-amber-400 font-bold uppercase tracking-wider">
+                        Turnos de hoy
+                      </span>
+                    </div>
+
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                      {TIME_SLOTS.map((slot) => {
+                        const isSelected = selectedTime === slot;
+                        return (
+                          <button
+                            key={slot}
+                            type="button"
+                            onClick={() => setSelectedTime(slot)}
+                            className={`cursor-pointer py-3.5 px-3 rounded-xl border-2 font-black text-xs sm:text-sm transition-all duration-200 hover:-translate-y-0.5 flex items-center justify-center gap-1.5 ${
+                              isSelected
+                                ? 'border-amber-400 bg-amber-400 text-neutral-950 shadow-[0_0_20px_rgba(251,191,36,0.3)]'
+                                : 'border-white/10 bg-neutral-900/60 text-white hover:border-amber-400/50'
+                            }`}
+                          >
+                            <Clock
+                              className={`w-3.5 h-3.5 ${
+                                isSelected ? 'text-neutral-950' : 'text-amber-400'
+                              }`}
+                            />
+                            <span>{slot}</span>
+                          </button>
+                        );
+                      })}
+                    </div>
+
+                    {/* Inputs para confirmación por WhatsApp */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-3">
+                      <div>
+                        <label className="text-xs font-extrabold uppercase tracking-wider text-neutral-300 block mb-1.5">
+                          Tu Nombre
+                        </label>
+                        <input
+                          type="text"
+                          placeholder="Ej. Sebastián Rojas"
+                          value={clientName}
+                          onChange={(e) => setClientName(e.target.value)}
+                          className="w-full px-4 py-3.5 rounded-xl bg-neutral-900/90 border border-white/15 focus:border-amber-400 outline-none text-sm font-bold text-white placeholder:text-neutral-500"
+                        />
+                      </div>
+                      <div>
+                        <label className="text-xs font-extrabold uppercase tracking-wider text-neutral-300 block mb-1.5">
+                          Tu WhatsApp (Para enviarte el ticket)
+                        </label>
+                        <input
+                          type="tel"
+                          placeholder="Ej. 943 123 456"
+                          value={clientPhone}
+                          onChange={(e) => setClientPhone(e.target.value)}
+                          className="w-full px-4 py-3.5 rounded-xl bg-neutral-900/90 border border-white/15 focus:border-amber-400 outline-none text-sm font-bold text-white placeholder:text-neutral-500"
+                        />
+                      </div>
+                    </div>
+                  </motion.div>
+
+                  {/* Resumen Pre-Confirmación y CTA Principal */}
+                  <div className="pt-2 space-y-4">
+                    <div className="bg-neutral-900/90 border border-white/15 rounded-2xl p-5 flex flex-wrap items-center justify-between gap-3">
+                      <div className="text-xs sm:text-sm space-y-1">
+                        <p className="font-black text-base text-white">
+                          {currentSrvObj.name} con {currentBrbObj.name} ({currentBrbObj.badge})
+                        </p>
+                        <p className="text-xs font-semibold text-neutral-300">
+                          📍 {currentLocObj.shortName} • ⏰ {selectedTime} • ✨ Incluye mascarilla y
+                          masaje
+                        </p>
+                      </div>
+                      <div className="text-right">
+                        <span className="text-xs font-bold uppercase tracking-wider text-neutral-400 block">
+                          Total
+                        </span>
+                        <span className="text-2xl font-black text-amber-400">
+                          S/ {currentSrvObj.price}.00
+                        </span>
+                      </div>
+                    </div>
+
+                    <motion.button
+                      type="submit"
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      disabled={isSendingWebhook}
+                      className="cursor-pointer w-full py-5 px-6 rounded-2xl bg-amber-400 hover:bg-amber-300 text-neutral-950 font-black text-base sm:text-xl uppercase tracking-tighter shadow-[0_14px_35px_rgba(251,191,36,0.3)] transition-all duration-300 flex items-center justify-center gap-3 disabled:opacity-70"
+                    >
+                      {isSendingWebhook ? (
+                        <>
+                          <RefreshCw className="w-5 h-5 text-neutral-950 animate-spin" />
+                          <span>Sincronizando con n8n &amp; WhatsApp...</span>
+                        </>
+                      ) : (
+                        <>
+                          <MessageCircle className="w-6 h-6 text-neutral-950 stroke-[2.5]" />
+                          <span>Confirmar Reserva Instantánea</span>
+                          <ChevronRight className="w-6 h-6 text-neutral-950 stroke-[2.75]" />
+                        </>
+                      )}
+                    </motion.button>
+                  </div>
+                </motion.form>
+              )}
+            </AnimatePresence>
           </div>
         </section>
       </main>
@@ -836,20 +999,20 @@ function PublicBookingView({ onNewBooking, onOpenAdmin }) {
       {/* ====================================================================
           FOOTER CON BOTÓN DISCRETO DE "Login Admin"
       ==================================================================== */}
-      <footer className="bg-white border-t border-neutral-200 py-8">
-        <div className="max-w-6xl mx-auto px-5 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-neutral-500">
+      <footer className="bg-neutral-950 border-t border-white/10 py-8">
+        <div className="max-w-6xl mx-auto px-5 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-neutral-400">
           <div className="flex items-center gap-2">
-            <Crown className="w-4 h-4 text-amber-500" />
-            <span className="font-bold text-neutral-800">King&apos;s Barber Shop</span>
+            <Crown className="w-4 h-4 text-amber-400" />
+            <span className="font-black text-white">King&apos;s Barber Shop</span>
             <span>• Nuevo Chimbote &amp; Chimbote Centro</span>
           </div>
 
           <button
             type="button"
             onClick={onOpenAdmin}
-            className="cursor-pointer inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-neutral-400 hover:text-neutral-900 hover:bg-neutral-100 transition-colors font-semibold"
+            className="cursor-pointer inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-neutral-400 hover:text-white hover:bg-white/5 border border-transparent hover:border-white/10 transition-colors font-bold"
           >
-            <Lock className="w-3.5 h-3.5 text-amber-500" />
+            <Lock className="w-3.5 h-3.5 text-amber-400" />
             <span>Login Admin</span>
           </button>
         </div>
@@ -1777,7 +1940,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-white text-neutral-900">
+    <div className="min-h-screen bg-neutral-950 text-white">
       {currentView === 'public' ? (
         <PublicBookingView
           onNewBooking={handleAddBookingFromPublic}
